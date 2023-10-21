@@ -162,13 +162,13 @@ public class Taxi
     public boolean isFree()
     {
         //TODO  implementar este método
-        boolean free = true;
-        if(passengersTransported != 0){
-            free = false;
-            System.out.println ("El taxi que ha solicitado esta ocupado");
+        boolean free = false;
+        if(passenger == null){
+            free = true;
+            System.out.println ("El taxi que ha solicitado esta libre");
         }
         else{
-            System.out.println ("El taxi que ha solicitado esta libre");
+            System.out.println ("El taxi que ha solicitado esta ocupado");
         }
         return free;
     }
@@ -199,8 +199,8 @@ public class Taxi
     public void pickup(Passenger passenger)
     {
         //TODO  implementar este método
-        Location destination = passenger.getDestination();
-        passenger.setDestination(destination);
+        targetLocation = passenger.getDestination();
+        //passenger.setNameTaxi = name;
 
     }
 

@@ -72,24 +72,7 @@ public class Location
     public Location nextLocation(Location destination)
     {
         Location actual = new Location(this.x,this.y);
-        if(!actual.equals(destination)){
-            if((destination.getX() < this.x) && (destination.getY() < this.y)){
-                actual.setX(x-1);
-                actual.setY(y-1);
-            }
-            else if((destination.getX() > this.x) && (destination.getY() > this.y)){
-                actual.setX(x+1);
-                actual.setY(y+1);
-            }
-            else if((destination.getX() < this.x) && (destination.getY() > this.y)){
-                actual.setX(x-1);
-                actual.setY(y+1);
-            }
-            else if((destination.getX() > this.x) && (destination.getY() < this.y)){
-                actual.setX(x+1);
-                actual.setY(y-1);
-            }
-            else if(destination.getX() < this.x){
+            if(destination.getX() < this.x){
                 actual.setX(x-1);
             }
             else if(destination.getX() > this.x){
@@ -100,10 +83,7 @@ public class Location
             }
             else if(destination.getY() > this.y){
                 actual.setY(y+1);
-            }
-            this.x = actual.getX();
-            this.y = actual.getY();
-        }        
+            }        
         //TODO ahora mismo este método devuelve directamente el destino final
         //PERO DEBERIA ir calculando y devolviendo la siguiente posición por la que 
         // va pasando el taxi hasta llegar al destino
