@@ -136,7 +136,12 @@ public class Taxi
     {
         return idleCount;
     }
-
+    /**
+    * @return on how many passengers this vehicle has transported.
+    */
+    public int getPassengersTransported(){
+        return passengersTransported;
+    }
     /**
      * Increment the number of steps on which this vehicle
      * has been idle.
@@ -179,6 +184,7 @@ public class Taxi
     public void notifyPickupArrival()
     {
         //TODO  implementar este método
+        this.company.arrivedAtPickup(this);
     }
 
     /**
@@ -187,8 +193,7 @@ public class Taxi
     public void notifyPassengerArrival(Passenger passenger)
     {
         //TODO  implementar este método
-        //Taxi t=new Taxi();
-        //this.company.arrivedAtDestination(t, passenger);
+        this.company.arrivedAtDestination(this, passenger);
     }
 
     /**
@@ -200,7 +205,7 @@ public class Taxi
     {
         //TODO  implementar este método
         targetLocation = passenger.getDestination();
-        //passenger.setNameTaxi = name;
+        passenger.setTaxiName(name);
 
     }
 
@@ -210,6 +215,8 @@ public class Taxi
     public void offloadPassenger()
     {
         //TODO  implementar este método
+        passenger=null;
+        clearTargetLocation();
     }
 
     /**
@@ -218,7 +225,7 @@ public class Taxi
     public int passengersTransported()
     {
         //TODO  implementar este método
-        return 1;
+        return passengersTransported;
     }
     
     /**
@@ -227,6 +234,8 @@ public class Taxi
     protected void incrementPassengersTransported()
     {
         //TODO  implementar este método
+        passengersTransported++;
+        
     }
 
     /**
@@ -236,7 +245,7 @@ public class Taxi
     public int distanceToTheTargetLocation()
     {
         //TODO  implementar este método
-        return 1;
+        return this.location.distance(targetLocation);
 
     }
 
@@ -246,6 +255,26 @@ public class Taxi
     public void act()
     {
         //TODO  implementar este método
+        if(targetLocation==null){
+            idleCount++;
+        }
+        else{
+            Location next=location;
+            next.nextLocation(targetLocation);
+            if(next==targetLocation){
+                if(passenger==null){
+                    notifyPickupArrival();
+                    pickup(passenger);
+                }
+                else{
+                    notifyPassengerArrival(passenger);
+                    offloadPassenger();
+                    passengersTransported++;
+                    
+                }
+            }
+            
+        }
     }
     
      /**
@@ -255,7 +284,9 @@ public class Taxi
     public String showFinalInfo()
     {
         //TODO  implementar este método
-        return "";
+        return ("Taxi name: "+ getName() +" "+"Location: " + getLocation() 
+        + " " + "Number of passenger transported: " + getPassengersTransported()
+        + " " + "Number of inactive steps: " + getIdleCount());
 
     }
 
