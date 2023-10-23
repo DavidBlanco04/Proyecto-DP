@@ -10,7 +10,10 @@ import java.util.*;
 public class TransportCompany  
 {
     // TODO definir todos sus campos
-    private String name;  //nombre de la compañía
+    private String name; //nombre de la compañía
+    ArrayList <Taxi> vehicles;
+    ArrayList <Passenger> passengers;
+    //ArrayList <Passenger> assignaments;
 
     /**
      * Constructor for objects of class TransportCompany
@@ -18,6 +21,9 @@ public class TransportCompany
     public TransportCompany(String name)
     {
         this.name = name;
+        vehicles = null;
+        passengers = null;
+        //assignaments = null;
         //TODO implementar el resto del constructor 
 
     }
@@ -48,7 +54,7 @@ public class TransportCompany
     {       
         //TODO implementar el método 
 
-        return null;
+        return vehicles;
     }
 
     /**
@@ -58,7 +64,7 @@ public class TransportCompany
     {
         //TODO implementar el método 
 
-        return null;
+        return passengers;
     }
 
     /**
@@ -67,6 +73,7 @@ public class TransportCompany
     public void addVehicle(Taxi vehicle)
     {
         //TODO implementar el método 
+        this.vehicles.add(vehicle);
     }
 
     /**
@@ -76,7 +83,7 @@ public class TransportCompany
     public void addPassenger(Passenger passenger)
     {
         //TODO implementar el método 
-
+        this.passengers.add(passenger);
     }
 
     /**
@@ -99,6 +106,9 @@ public class TransportCompany
     public boolean requestPickup(Passenger passenger)
     {
         //TODO implementar el método 
+        
+        //scheduleVehicle(vehicles.setPickUpLocation(passengers.getPickup()));
+        
         return true;
     }
 
@@ -114,5 +124,12 @@ public class TransportCompany
         //TODO el pasajero debe guardar el nombre del taxi que le ha recogido
         //TODO el taxi debe recoger al pasajero
     }
-
+    
+    public String arrivedAtDestination()
+    {
+        // TO DO
+        return "";
+        //return ("Taxi: "+ getName() +" "+"at " + getDestination() + " " + "Taxi name: " + getTaxiName());
+    }
+    
 }
