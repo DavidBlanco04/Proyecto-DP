@@ -9,7 +9,7 @@ public class ComparadorDistanciaTaxi implements Comparator<Taxi>
 {
     public int compare(Taxi t1, Taxi t2){  
         if (t1.distanceToTheTargetLocation()==t2.distanceToTheTargetLocation()){
-            return t1.getName().compareTo(t2.getName());
+            return (t1.getName().compareTo(t2.getName()));
         }
         else if(t1.distanceToTheTargetLocation()>t2.distanceToTheTargetLocation()){
             return 1;
