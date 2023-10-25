@@ -244,9 +244,7 @@ public class Taxi
      */
     public int distanceToTheTargetLocation()
     {
-        //TODO  implementar este método
         return this.location.distance(targetLocation);
-
     }
 
     /**
@@ -254,7 +252,6 @@ public class Taxi
      */
     public void act()
     {
-        //TODO  implementar este método
         if(targetLocation==null){
             idleCount++;
         }
@@ -283,7 +280,6 @@ public class Taxi
      */
     public String showFinalInfo()
     {
-        //TODO  implementar este método
         return ("Taxi name: "+ getName() +" "+"Location: " + getLocation() 
         + " " + "Number of passenger transported: " + getPassengersTransported()
         + " " + "Number of inactive steps: " + getIdleCount());

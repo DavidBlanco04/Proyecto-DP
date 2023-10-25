@@ -9,11 +9,10 @@ import java.util.*;
  */
 public class TransportCompany  
 {
-    // TODO definir todos sus campos
     private String name; //nombre de la compañía
-    ArrayList <Taxi> vehicles;
-    ArrayList <Passenger> passengers;
-    //ArrayList <Passenger> assignaments;
+    private ArrayList <Taxi> vehicles;
+    private ArrayList <Passenger> passengers;
+    private ArrayList <Assignment> assignments;
 
     /**
      * Constructor for objects of class TransportCompany
@@ -21,10 +20,9 @@ public class TransportCompany
     public TransportCompany(String name)
     {
         this.name = name;
-        vehicles = null;
-        passengers = null;
-        //assignaments = null;
-        //TODO implementar el resto del constructor 
+        this.vehicles = new ArrayList <Taxi>();
+        this.passengers = new ArrayList <Passenger>();
+        this.assignments = new ArrayList <Assignment>();
 
     }
 
@@ -52,8 +50,6 @@ public class TransportCompany
      */
     public List<Taxi> getVehicles()
     {       
-        //TODO implementar el método 
-
         return vehicles;
     }
 
@@ -61,9 +57,7 @@ public class TransportCompany
      * @return The list of passengers.
      */
     public List<Passenger> getPassengers()
-    {
-        //TODO implementar el método 
-
+    { 
         return passengers;
     }
 
@@ -72,7 +66,6 @@ public class TransportCompany
      */
     public void addVehicle(Taxi vehicle)
     {
-        //TODO implementar el método 
         this.vehicles.add(vehicle);
     }
 
@@ -81,8 +74,7 @@ public class TransportCompany
      * @param passenger The new passenger.
      */
     public void addPassenger(Passenger passenger)
-    {
-        //TODO implementar el método 
+    { 
         this.passengers.add(passenger);
     }
 
