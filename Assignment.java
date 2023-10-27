@@ -7,7 +7,6 @@
  */
 public class Assignment
 {
-    // instance variables - replace the example below with your own
     private Taxi t;
     private Passenger P;
 

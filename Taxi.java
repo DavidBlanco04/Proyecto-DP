@@ -61,7 +61,15 @@ public class Taxi
     {
         return location;
     }
-
+    
+    /**
+     * Get the location.
+     * @return .
+     */
+    public Passenger getPassenger()
+    {
+        return passenger;
+    }
     /**
      * Set the current location.
      * @param location Where it is. Must not be null.
@@ -165,7 +173,6 @@ public class Taxi
      */
     public boolean isFree()
     {
-        //TODO  implementar este método
         boolean free = false;
         if(passenger == null){
             free = true;

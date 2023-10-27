@@ -85,7 +85,6 @@ public class TransportCompany
      */
     private Taxi scheduleVehicle(Location location)
     {
-        //TODO implementar el método 
         Collections.sort(this.vehicles, new ComparadorDistanciaTaxi());
         Taxi libre=null;
         boolean enc=false;
@@ -105,11 +104,16 @@ public class TransportCompany
      */
     public boolean requestPickup(Passenger passenger)
     {
-        //TODO implementar el método 
-        
-        //scheduleVehicle(vehicles.setPickUpLocation(passengers.getPickup()));
-        
-        return true;
+        boolean enc=false;
+        Assignment a=null;
+        Taxi t=scheduleVehicle(passenger.getPickup());
+        t.setPickupLocation(passenger.getPickup());
+        if(t!=null){
+            enc=true;
+            a=new Assignment(t,passenger);
+            assignments.add(a);
+        }
+        return enc;
     }
 
     /**
@@ -118,18 +122,29 @@ public class TransportCompany
      */
     public void arrivedAtPickup(Taxi taxi)
     {
+        if(taxi.getLocation()==taxi.getTargetLocation()){
+            //taxi.pickup(); 
+            //System.out.println("<<<< "+taxi + " picks up " + passenger.getName());
+            Iterator<Assignment> it=assignments.iterator();
+            it.remove();
+
+        }
         //TODO Obtener el pasajero asignado al taxi y eliminar la asignación correspondiente taxi/pasajero
         //TODO Descomentar siguiente línea cuando esté el método completamente implementado
-        //System.out.println("<<<< "+taxi + " picks up " + passenger.getName());
+
         //TODO el pasajero debe guardar el nombre del taxi que le ha recogido
         //TODO el taxi debe recoger al pasajero
     }
-    
+
     public String arrivedAtDestination()
     {
-        // TO DO
-        return "";
-        //return ("Taxi: "+ getName() +" "+"at " + getDestination() + " " + "Taxi name: " + getTaxiName());
+        String mensaje;
+        for(int i=0; i<vehicles.size(); i++){
+            if(vehicles.get(i).getTargetLocation()==vehicles.get(i).getPassenger().getDestination()){
+                mensaje=“Taxi (name) at (location) offloads Passenger (passenger) travelling from (location1) to (location2)”;
+            }
+        }
+        return mensaje;
     }
-    
 }
+ 
