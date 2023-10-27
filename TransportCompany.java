@@ -35,17 +35,6 @@ public class TransportCompany
     }
 
     /**
-     * A vehicle has arrived at a passenger's destination.
-     * @param vehicle The vehicle at the destination.
-     * @param passenger The passenger being dropped off.
-     */
-    public void arrivedAtDestination(Taxi vehicle,
-    Passenger passenger)
-    {
-        System.out.println(vehicle + " offloads " + passenger);
-    }
-
-    /**
      * @return The list of vehicles.
      */
     public List<Taxi> getVehicles()
@@ -85,14 +74,19 @@ public class TransportCompany
      */
     private Taxi scheduleVehicle(Location location)
     {
-        Collections.sort(this.vehicles, new ComparadorDistanciaTaxi());
         Taxi libre=null;
         boolean enc=false;
-        for(int i=0; i<this.vehicles.size() && !enc ;i++){
+        ArrayList<Taxi> aux = null;
+        for(int i=0; i<this.vehicles.size();i++){
             if(vehicles.get(i).isFree()==true){
-                libre=vehicles.get(i);
-                enc=true;
+                aux.add(vehicles.get(i));
+                vehicles.get(i).setTargetLocation(location);
             }
+        }
+        Collections.sort(aux, new ComparadorDistanciaTaxi());
+        libre = aux.get(0);
+            for(int i=0; i<aux.size();i++){
+                aux.get(i).setTargetLocation(null);
         }
         return libre;
     }
@@ -107,8 +101,8 @@ public class TransportCompany
         boolean enc=false;
         Assignment a=null;
         Taxi t=scheduleVehicle(passenger.getPickup());
-        t.setPickupLocation(passenger.getPickup());
         if(t!=null){
+            t.setPickupLocation(passenger.getPickup());
             enc=true;
             a=new Assignment(t,passenger);
             assignments.add(a);
@@ -122,28 +116,34 @@ public class TransportCompany
      */
     public void arrivedAtPickup(Taxi taxi)
     {
-        if(taxi.getLocation()==taxi.getTargetLocation()){
-            //taxi.pickup(); 
-            //System.out.println("<<<< "+taxi + " picks up " + passenger.getName());
-            Iterator<Assignment> it=assignments.iterator();
-            it.remove();
+        boolean enc=false;
+        Passenger p = null;
+        Taxi t = null;
+        Assignment a = null;
+        Iterator<Assignment> it=assignments.iterator();
+        while (it.hasNext() && !enc){
+            a = it.next();
+            if(a.getTaxi().getName().equals(taxi.getName())){
+                t = a.getTaxi();
+                p = a.getPassenger();
+                it.remove();
+                enc = true;
 
-        }
-        //TODO Obtener el pasajero asignado al taxi y eliminar la asignación correspondiente taxi/pasajero
-        //TODO Descomentar siguiente línea cuando esté el método completamente implementado
-
-        //TODO el pasajero debe guardar el nombre del taxi que le ha recogido
-        //TODO el taxi debe recoger al pasajero
-    }
-
-    public String arrivedAtDestination()
-    {
-        String mensaje;
-        for(int i=0; i<vehicles.size(); i++){
-            if(vehicles.get(i).getTargetLocation()==vehicles.get(i).getPassenger().getDestination()){
-                mensaje=“Taxi (name) at (location) offloads Passenger (passenger) travelling from (location1) to (location2)”;
             }
         }
+        if(t != null){
+            t.pickup(p);
+            p.setTaxiName(t.getName());
+            System.out.println("<<<<"+t+ "pick up" + p.getName());
+        }
+    }
+
+    public String arrivedAtDestination(Taxi t, Passenger p)
+    {
+        String mensaje = " ";
+        mensaje=("Taxi" + t.getName() + "at" + t.getLocation()
+            + "offloads Passenger"+ p + "travelling from" +p.getPickup()
+            + "to" + p.getDestination());
         return mensaje;
     }
 }
