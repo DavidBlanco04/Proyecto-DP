@@ -86,8 +86,16 @@ public class TransportCompany
     private Taxi scheduleVehicle(Location location)
     {
         //TODO implementar el método 
-
-        return null;
+        Collections.sort(this.vehicles, new ComparadorDistanciaTaxi());
+        Taxi libre=null;
+        boolean enc=false;
+        for(int i=0; i<this.vehicles.size() && !enc ;i++){
+            if(vehicles.get(i).isFree()==true){
+                libre=vehicles.get(i);
+                enc=true;
+            }
+        }
+        return libre;
     }
 
     /**

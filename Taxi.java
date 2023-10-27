@@ -45,7 +45,6 @@ public class Taxi
         passengersTransported = 0;
         //TODO resto de inicializaciones pendientes
     }
-
     /**
      * @return the name of the taxi
      */
