@@ -12,7 +12,7 @@ public class Passenger
     private Location pickup;
     private Location destination;
     private String taxiName;
-    //incluir campo para el nombre del taxi que lo ha transportado
+    
 
     /**
      * Constructor for objects of class Passenger
@@ -23,7 +23,6 @@ public class Passenger
      */
     public Passenger(Location pickup, Location destination, String name)
     {
-        //TODO modificar el constructor o crear otro constructor si necesario
         if(pickup == null) {
             throw new NullPointerException("Pickup location");
         }
@@ -34,9 +33,13 @@ public class Passenger
         this.destination = destination;
         this.name = name;
         this.taxiName = null;
-        //incluir inicialización del campo para el nombre del taxi que lo ha transportado
+        
     }
-
+    
+    public void setName(String Name){
+         this.name = name;
+    }
+        
     /**
      * @return The name of the passenger.
      */
@@ -44,7 +47,12 @@ public class Passenger
     {
         return name;
     }
-
+    
+    public void setDestination(Location destination)
+    {
+        this.destination = destination;
+    }
+    
     /**
      * @return The destination location.
      */
@@ -63,28 +71,22 @@ public class Passenger
         pickup + " to " + destination;
     }
     
-    //TODO Debe poder devolver la posición donde hay que recoger al Passenger.
+    public void setPickup(Location pickup)
+    {
+        this.pickup = pickup;
+    }
+    
     public Location getPickup(){
         return pickup;
     }
     
-    
-    //TODO Debe poder devolver la localización donde hay que llevar al Passenger.
-    public void setDestination(Location destination)
-    {
-        this.destination = destination;
-    }
-    
-    //TODO Debe poder modificarse el nombre del taxi usado.
     public void setTaxiName(String taxiName){
          this.taxiName = taxiName;
     }
    
-    //TODO Debe poder devolver el nombre del taxi usado.
     public String getTaxiName(){
         return taxiName;
     }
-    
     
     
     /**
@@ -92,7 +94,6 @@ public class Passenger
      */
     public String showFinalInfo()
     {
-        // TO DO
         return ("Passenger name: "+ getName() +" "+"Destination: " + getDestination() + " " + "Taxi name: " + getTaxiName());
     }
 
