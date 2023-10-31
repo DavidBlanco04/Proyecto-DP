@@ -106,12 +106,22 @@ public class DemoOnePassanger
         System.out.println("-->> Taxis of the company <<--");
 
         //TODO ordenar y mostrar los taxis
-
+        Iterator<Taxi> it=company.getVehicles().iterator();
+        Collections.sort(company.getVehicles(), new ComparadorNombreTaxi());
+        while (it.hasNext()){
+          Taxi t= it.next();
+          System.out.println(t);
+        }
         //TODO ordenar y mostrar los pasajero/as
+        Iterator<Passenger> itP=company.getPassengers().iterator();
+        Collections.sort(company.getPassengers(), new ComparadorNombrePassenger());
+        while (itP.hasNext()){
+          Passenger p = itP.next();
+          System.out.println(p);
+        }
         //para ordenar una colección aplicando un comparador, esta sería 
         //la sintaxis (suponiendo que "passengers" es una colección donde
         //la compañía de taxis almacena los pasajero/as):
-        //Collections.sort(passengers, new ComparadorNombrePassenger());
 
         System.out.println("-->> Passengers requesting taxi <<--");
         System.out.println("-->> ---------------- <<--");

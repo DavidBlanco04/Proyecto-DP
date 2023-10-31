@@ -43,7 +43,7 @@ public class Taxi
         idleCount = 0;
         passenger = null;
         passengersTransported = 0;
-        //TODO resto de inicializaciones pendientes
+        this.name = name;
     }
     /**
      * @return the name of the taxi
@@ -189,7 +189,6 @@ public class Taxi
      */
     public void notifyPickupArrival()
     {
-        //TODO  implementar este método
         this.company.arrivedAtPickup(this);
     }
 
@@ -198,7 +197,6 @@ public class Taxi
      */
     public void notifyPassengerArrival(Passenger passenger)
     {
-        //TODO  implementar este método
         this.company.arrivedAtDestination(this, passenger);
     }
 
@@ -209,7 +207,6 @@ public class Taxi
      */
     public void pickup(Passenger passenger)
     {
-        //TODO  implementar este método
         targetLocation = passenger.getDestination();
         passenger.setTaxiName(name);
 
@@ -220,7 +217,6 @@ public class Taxi
      */
     public void offloadPassenger()
     {
-        //TODO  implementar este método
         passenger=null;
         clearTargetLocation();
     }
@@ -230,7 +226,6 @@ public class Taxi
      */
     public int passengersTransported()
     {
-        //TODO  implementar este método
         return passengersTransported;
     }
     
@@ -239,7 +234,6 @@ public class Taxi
      */
     protected void incrementPassengersTransported()
     {
-        //TODO  implementar este método
         passengersTransported++;
         
     }
@@ -264,7 +258,7 @@ public class Taxi
         else{
             Location next=location;
             next.nextLocation(targetLocation);
-            if(next==targetLocation){
+            if(next.equals(targetLocation)){
                 if(passenger==null){
                     notifyPickupArrival();
                     pickup(passenger);

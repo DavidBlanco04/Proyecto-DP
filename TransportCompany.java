@@ -76,7 +76,7 @@ public class TransportCompany
     {
         Taxi libre=null;
         boolean enc=false;
-        ArrayList<Taxi> aux = null;
+        ArrayList<Taxi> aux = new ArrayList<Taxi>();
         for(int i=0; i<this.vehicles.size();i++){
             if(vehicles.get(i).isFree()==true){
                 aux.add(vehicles.get(i));
