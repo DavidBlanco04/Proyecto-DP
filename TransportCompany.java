@@ -134,7 +134,7 @@ public class TransportCompany
         if(t != null){
             t.pickup(p);
             p.setTaxiName(t.getName());
-            System.out.println("<<<<"+t+ "pick up" + p.getName());
+            System.out.println("<<<< Taxi"+t.getName() +"at location"+ t.getLocation()+"pick up" + p.getName());
         }
     }
 

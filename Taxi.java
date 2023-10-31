@@ -208,7 +208,7 @@ public class Taxi
     public void pickup(Passenger passenger)
     {
         targetLocation = passenger.getDestination();
-        passenger.setTaxiName(name);
+        passenger.setTaxiName(this.name);
 
     }
 
@@ -253,7 +253,7 @@ public class Taxi
     public void act()
     {
         if(targetLocation==null){
-            idleCount++;
+             incrementIdleCount();
         }
         else{
             Location next=location;
