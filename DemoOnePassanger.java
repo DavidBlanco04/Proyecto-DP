@@ -104,21 +104,28 @@ public class DemoOnePassanger
 
         System.out.println("--->> Simulation of the company: "+company.getName()+" <<---");
         System.out.println("-->> Taxis of the company <<--");
+        //System.out.println(company.getVehicles());
+        for(Taxi t:company.getVehicles()){
+        System.out.println(t + "p");
+        }
 
+        for(Passenger p:company.getPassengers()){
+        System.out.println(p + "p");
+        }
         //TODO ordenar y mostrar los taxis
-        Iterator<Taxi> it=company.getVehicles().iterator();
+        /*Iterator<Taxi> it=company.getVehicles().iterator();
         Collections.sort(company.getVehicles(), new ComparadorNombreTaxi());
         while (it.hasNext()){
-          Taxi t= it.next();
-          System.out.println(t);
+            Taxi t= it.next();
+            System.out.println(t);
         }
         //TODO ordenar y mostrar los pasajero/as
         Iterator<Passenger> itP=company.getPassengers().iterator();
         Collections.sort(company.getPassengers(), new ComparadorNombrePassenger());
         while (itP.hasNext()){
-          Passenger p = itP.next();
-          System.out.println(p);
-        }
+            Passenger p = itP.next();
+            System.out.println(p);
+        }*/
         //para ordenar una colección aplicando un comparador, esta sería 
         //la sintaxis (suponiendo que "passengers" es una colección donde
         //la compañía de taxis almacena los pasajero/as):
@@ -144,9 +151,21 @@ public class DemoOnePassanger
 
         System.out.println("-->> Taxis final information <<--");
         //TODO ordenar y mostrar los taxis
+        Iterator<Taxi> it=company.getVehicles().iterator();
+        Collections.sort(company.getVehicles(), new ComparadorNombreTaxi());
+        while (it.hasNext()){
+            Taxi t= it.next();
+            System.out.println(t.showFinalInfo());
+        }
 
         System.out.println("-->> Passengers final information <<--");
         //TODO ordenar y mostrar los pasajero/as
+        Iterator<Passenger> itP=company.getPassengers().iterator();
+        Collections.sort(company.getPassengers(), new ComparadorNombrePassenger());
+        while (itP.hasNext()){
+            Passenger p = itP.next();
+            System.out.println(p.showFinalInfo());
+        }
 
     }
 }

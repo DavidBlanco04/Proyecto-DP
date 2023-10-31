@@ -85,7 +85,7 @@ public class TransportCompany
         }
         Collections.sort(aux, new ComparadorDistanciaTaxi());
         libre = aux.get(0);
-            for(int i=0; i<aux.size();i++){
+            for(int i=1; i<aux.size();i++){
                 aux.get(i).setTargetLocation(null);
         }
         return libre;

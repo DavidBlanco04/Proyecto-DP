@@ -39,11 +39,11 @@ public class Taxi
         }
         this.company = company;
         this.location = location;
+        this.name = name;
         targetLocation = null;
         idleCount = 0;
         passenger = null;
         passengersTransported = 0;
-        this.name = name;
     }
     /**
      * @return the name of the taxi
