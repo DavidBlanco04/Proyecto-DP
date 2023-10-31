@@ -45,6 +45,7 @@ public class Taxi
         passenger = null;
         passengersTransported = 0;
     }
+
     /**
      * @return the name of the taxi
      */
@@ -61,7 +62,7 @@ public class Taxi
     {
         return location;
     }
-    
+
     /**
      * Get the location.
      * @return .
@@ -70,6 +71,11 @@ public class Taxi
     {
         return passenger;
     }
+
+    public void setPassenger(Passenger passenger){
+        this.passenger = passenger;
+    }
+
     /**
      * Set the current location.
      * @param location Where it is. Must not be null.
@@ -110,7 +116,7 @@ public class Taxi
         }
     }
 
-     /**
+    /**
      * Receive a pickup location. This becomes the
      * target location.
      * @param location The pickup location.
@@ -119,7 +125,7 @@ public class Taxi
     {
         setTargetLocation(location);
     }
-    
+
     /**
      * Has the vehicle a target Location?
      * @return Whether or not this vehicle has a target Location.
@@ -127,7 +133,7 @@ public class Taxi
     public boolean hasTargetLocation(){
         return getTargetLocation() != null;
     }
-    
+
     /**
      * Clear the target location.
      */
@@ -143,12 +149,14 @@ public class Taxi
     {
         return idleCount;
     }
+
     /**
-    * @return on how many passengers this vehicle has transported.
-    */
+     * @return on how many passengers this vehicle has transported.
+     */
     public int getPassengersTransported(){
         return passengersTransported;
     }
+
     /**
      * Increment the number of steps on which this vehicle
      * has been idle.
@@ -176,7 +184,7 @@ public class Taxi
         boolean free = false;
         if(passenger == null){
             free = true;
-            System.out.println ("El taxi que ha solicitado esta libre");
+            //System.out.println ("El taxi que ha solicitado esta libre");
         }
         else{
             System.out.println ("El taxi que ha solicitado esta ocupado");
@@ -209,6 +217,7 @@ public class Taxi
     {
         targetLocation = passenger.getDestination();
         passenger.setTaxiName(this.name);
+        setPassenger(passenger);
 
     }
 
@@ -228,14 +237,14 @@ public class Taxi
     {
         return passengersTransported;
     }
-    
+
     /**
      * Increment the number of passengers this vehicle has transported.
      */
     protected void incrementPassengersTransported()
     {
         passengersTransported++;
-        
+
     }
 
     /**
@@ -253,36 +262,35 @@ public class Taxi
     public void act()
     {
         if(targetLocation==null){
-             incrementIdleCount();
+            incrementIdleCount();
         }
         else{
-            Location next=location;
-            next.nextLocation(targetLocation);
-            if(next.equals(targetLocation)){
-                if(passenger==null){
-                    notifyPickupArrival();
-                    pickup(passenger);
-                }
-                else{
-                    notifyPassengerArrival(passenger);
-                    offloadPassenger();
-                    passengersTransported++;
-                    
-                }
+            while(!location.equals(targetLocation)){
+                System.out.println(this +" moving to:"+ location);
+                location = location.nextLocation(targetLocation);
             }
-            
+            if(passenger==null){
+                notifyPickupArrival();
+                //pickup(passenger);
+            }
+            else{
+                notifyPassengerArrival(passenger);
+                offloadPassenger();
+                incrementPassengersTransported();
+
+            }
         }
     }
-    
-     /**
+
+    /**
      * Return details of the taxi, such as where it is.
      * @return A string representation of the taxi.
      */
     public String showFinalInfo()
     {
         return ("Taxi name: "+ getName() +" "+"Location: " + getLocation() 
-        + " " + "Number of passenger transported: " + getPassengersTransported()
-        + " " + "Number of inactive steps: " + getIdleCount());
+            + " " + "Number of passenger transported: " + getPassengersTransported()
+            + " " + "Number of inactive steps: " + getIdleCount());
 
     }
 

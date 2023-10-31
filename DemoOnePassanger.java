@@ -129,7 +129,7 @@ public class DemoOnePassanger
     private void showFinalInfo() {
         //actors.get(0).setTargetLocation(company.getPassengers().get(0).getPickup());
         //while (company.getVehicles().get(0).getLocation().equals(company.getPassengers().get(0).getDestination())){
-            actors.get(0).act();
+        //actors.get(0).act();
         //}
         System.out.println("");
         System.out.println("-->> ----------------- <<--");

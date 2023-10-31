@@ -116,11 +116,10 @@ public class TransportCompany
      */
     public void arrivedAtPickup(Taxi taxi)
     {
-        boolean enc=false;
-        Passenger p = null;
-        Taxi t = null;
-        Assignment a = null;
-        Iterator<Assignment> it=assignments.iterator();
+        //boolean enc=false;
+        //Taxi t = null;
+        //Assignment a = null;
+        /*Iterator<Assignment> it=assignments.iterator();
         while (it.hasNext() && !enc){
             a = it.next();
             if(a.getTaxi().getName().equals(taxi.getName())){
@@ -130,11 +129,11 @@ public class TransportCompany
                 enc = true;
 
             }
-        }
-        if(t != null){
-            t.pickup(p);
-            p.setTaxiName(t.getName());
-            System.out.println("<<<< Taxi"+t.getName() +"at location"+ t.getLocation()+"pick up" + p.getName());
+        }*/
+        if(taxi != null){
+            taxi.pickup(assignments.get(0).getPassenger());
+            //p.setTaxiName(t.getName());
+            System.out.println("<<<< Taxi"+taxi.getName() +"at location"+ taxi.getLocation()+"pick up" + assignments.get(0).getPassenger().getName());
         }
     }
 

@@ -84,9 +84,6 @@ public class Location
             else if(destination.getY() > this.y){
                 actual.setY(y+1);
             }        
-        //TODO ahora mismo este método devuelve directamente el destino final
-        //PERO DEBERIA ir calculando y devolviendo la siguiente posición por la que 
-        // va pasando el taxi hasta llegar al destino
         return actual;
     }
 
@@ -104,7 +101,6 @@ public class Location
         }else{
             a = Math.abs(destination.getY()-this.y);
         }
-        //TODO implementar este método que devuelve el número total de pasos para alcanzar el destino
         return a;
     }
 
