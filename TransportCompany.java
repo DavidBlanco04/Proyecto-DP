@@ -35,6 +35,15 @@ public class TransportCompany
     }
 
     /**
+     * Recieve a name and sets it as the name of the trasnport company
+     * @param The name of the company.
+     */
+    public void setName(String name)
+    {
+        this.name=name;
+    }
+
+    /**
      * @return The list of vehicles.
      */
     public List<Taxi> getVehicles()
@@ -48,6 +57,14 @@ public class TransportCompany
     public List<Passenger> getPassengers()
     { 
         return passengers;
+    }
+
+    /**
+     * @return The list of assignments.
+     */
+    public ArrayList <Assignment> getAssignment()
+    { 
+        return assignments;
     }
 
     /**
@@ -74,22 +91,50 @@ public class TransportCompany
      */
     private Taxi scheduleVehicle(Location location)
     {
+        ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
+        c.setLocation(location);
+        Collections.sort(vehicles, c);
         Taxi libre=null;
-        boolean enc=false;
-        ArrayList<Taxi> aux = new ArrayList<Taxi>();
-        for(int i=0; i<this.vehicles.size();i++){
-            if(vehicles.get(i).isFree()==true){
-                aux.add(vehicles.get(i));
-                vehicles.get(i).setTargetLocation(location);
+        for(int i=0; i<this.vehicles.size() && libre==null;i++){
+            Taxi t=vehicles.get(i);
+            if(t.isFree()){
+                if(this.assignments.size()==0){
+                    libre=t;
+                }
+                else{
+                    boolean enc=true;
+                    for(int j=0; j<this.assignments.size();j++){
+                        if(this.assignments.get(j).getTaxi().getName().equals(t.getName())){
+                            enc=false;
+                        }
+                    }
+                    if(enc){
+                        libre=t;
+                    }
+
+                }
             }
         }
-        Collections.sort(aux, new ComparadorDistanciaTaxi());
-        libre = aux.get(0);
-        /*for(int i=1; i<aux.size();i++){
-                aux.get(i).setTargetLocation(null);
-        }*/
         return libre;
     }
+    /*Taxi libre=null;
+    boolean enc=true;
+    ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
+    c.setLocation(location);
+    Collections.sort(vehicles, c);
+    for(int i=0; i<this.vehicles.size() && enc;i++){
+    Taxi t=vehicles.get(i);
+    for(int j=0; j<this.assignments.size();j++){
+    if(assignments.get(j).getTaxi().getName().equals(t.getName()) && t.getPassenger()!=null){
+    enc=false;
+    }    
+    }
+    if(enc){
+    libre=t;
+    }
+    }
+    return libre;
+    }*/
 
     /**
      * Request a pickup for the given passenger.
@@ -106,6 +151,8 @@ public class TransportCompany
             enc=true;
             a=new Assignment(t,passenger);
             assignments.add(a);
+            System.out.println (t.toString() + " go to pick up "
+                + passenger.getName()+ " at " + t.getTargetLocation());
         }
         return enc;
     }
@@ -134,11 +181,15 @@ public class TransportCompany
         if(t!= null ){
             t.pickup(p);
             System.out.println("<<<< Taxi "+t.getName() +" at location "+ t.getLocation()+" pick up "
-            + p.getName());
-            
+                + p.getName());
+
         }
     }
 
+    /**
+     * Show a message when the taxi arrives to the destination location
+     * @param the taxi where trasnport the passenger and the passenger who is transpoted in this taxi.
+     */
     public String arrivedAtDestination(Taxi t, Passenger p)
     {
         String mensaje = " ";

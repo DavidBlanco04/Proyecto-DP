@@ -12,7 +12,6 @@ public class Passenger
     private Location pickup;
     private Location destination;
     private String taxiName;
-    
 
     /**
      * Constructor for objects of class Passenger
@@ -33,13 +32,17 @@ public class Passenger
         this.destination = destination;
         this.name = name;
         this.taxiName = null;
-        
+
     }
-    
+
+    /**
+     *Receive a name. This becomes the passenger's name.
+     *@param the passenger's name
+     */
     public void setName(String Name){
-         this.name = name;
+        this.name = name;
     }
-        
+
     /**
      * @return The name of the passenger.
      */
@@ -47,12 +50,16 @@ public class Passenger
     {
         return name;
     }
-    
+
+    /**
+     *Receive a location. This becomes the location where the passenger wants to go.
+     *@param the destination location
+     */
     public void setDestination(Location destination)
     {
         this.destination = destination;
     }
-    
+
     /**
      * @return The destination location.
      */
@@ -60,7 +67,7 @@ public class Passenger
     {
         return destination;
     }
-    
+
     /**
      * Return details of the passenger, such as where it is.
      * @return A string representation of the passenger.
@@ -70,25 +77,38 @@ public class Passenger
         return "Passenger "+getName()+" travelling from " +
         pickup + " to " + destination;
     }
-    
+
+    /**
+     *Receive a location. This becomes the location where the passenger will be picked up.
+     *@param the pick up location
+     */
     public void setPickup(Location pickup)
     {
         this.pickup = pickup;
     }
-    
+
+    /**
+     *@return the pick up location
+     */
     public Location getPickup(){
         return pickup;
     }
-    
+
+    /**
+     *Receive a name. This will be the name of the taxi where the passenger will be transported.
+     *@param the taxi name
+     */
     public void setTaxiName(String taxiName){
-         this.taxiName = taxiName;
+        this.taxiName = taxiName;
     }
-   
+
+    /**
+     *@return the name of the taxi where the passenger will be transported
+     */
     public String getTaxiName(){
         return taxiName;
     }
-    
-    
+
     /**
      * Show the final information about the passenger, including the name of the taxi that used.
      */

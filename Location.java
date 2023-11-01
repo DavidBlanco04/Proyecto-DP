@@ -7,8 +7,8 @@
  */
 public class Location
 {
-    private int x;  //TODO cambiar a private
-    private int y;  //TODO cambiar a private
+    private int x; 
+    private int y;  
 
     /**
      * Model a location in the city.
@@ -37,23 +37,25 @@ public class Location
     {
         return x;
     }
-    
-        /**
-     * @return The x coordinate.
+
+    /**
+     * Receive a x coordinate. This becomes the x coordinate of the location.
+     * @param The x coordinate.
      */
     public void setX(int x)
     {
         this.x=x;
     }
-    
-            /**
-     * @return The x coordinate.
+
+    /**
+     * Receive a y coordinate. This becomes the y coordinate of the location.
+     * @param The y coordinate.
      */
     public void setY(int y)
     {
         this.y=y;
     }
-    
+
     /**
      * @return The y coordinate.
      */
@@ -72,18 +74,18 @@ public class Location
     public Location nextLocation(Location destination)
     {
         Location actual = new Location(this.x,this.y);
-            if(destination.getX() < this.x){
-                actual.setX(x-1);
-            }
-            else if(destination.getX() > this.x){
-                actual.setX(x+1);
-            }   
-            if(destination.getY() < this.y){
-                actual.setY(y-1);
-            }
-            else if(destination.getY() > this.y){
-                actual.setY(y+1);
-            }        
+        if(destination.getX() < this.x){
+            actual.setX(x-1);
+        }
+        else if(destination.getX() > this.x){
+            actual.setX(x+1);
+        }   
+        if(destination.getY() < this.y){
+            actual.setY(y-1);
+        }
+        else if(destination.getY() > this.y){
+            actual.setY(y+1);
+        }        
         return actual;
     }
 

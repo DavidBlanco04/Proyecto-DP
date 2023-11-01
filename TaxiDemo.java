@@ -21,7 +21,7 @@ public class TaxiDemo
 {
     public static final int MAXX = 20; //Valor máximo de número de filas 
     public static final int MAXY = 20; //Valor máximo de número de columnas
-    
+
     public static void main() {
         //Comentar o descomentar cada demo para ser ejecutada
 

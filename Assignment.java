@@ -1,9 +1,6 @@
 
 /**
- * Write a description of class Assignment here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ *This is the assignment class which assigns a taxi to the passenger who requests it
  */
 public class Assignment
 {
@@ -17,30 +14,38 @@ public class Assignment
     {
         this.t = t;
         this.P = P;
-        
+
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @return the taxi of the assignment
      */
     public Taxi getTaxi()
     {
         return this.t;
     }
-    
+
+    /**
+     * @return the passenger of the assignment
+     */
     public Passenger getPassenger()
     {
         return this.P;
     }
-    
+
+    /**
+     * Recieve a taxi and sets it to the assignments taxi.
+     * @param the taxi of the assignment
+     */
     public void setTaxi(Taxi taxi1)
     {
         this.t = taxi1;
     }
-    
+
+    /**
+     * Recieve a passenger and sets it to the assignments taxi.
+     * @param the passenger of the assignment
+     */
     public void setPassenger(Passenger P1)
     {
         this.P = P1;

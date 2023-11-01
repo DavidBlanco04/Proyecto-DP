@@ -14,3 +14,6 @@ How to start this project:
     A single taxi carries a single passenger to their destination.
 
 The test classes provide a little testing of basic functionality.
+
+EXTRA REQUIREMENTS: we have used some iterators, collections to order an estructure and comparators. We also have used github app functionallity.
+GITHUB CODE:https://github.com/DavidBlanco04/Proyecto-DP.git

@@ -55,6 +55,15 @@ public class Taxi
     }
 
     /**
+     *Receive a name. This will be the taxi name
+     *@param the taxi name
+     */
+    public void setName(String name)
+    {
+        this.name=name;
+    }
+
+    /**
      * Get the location.
      * @return Where this taxi is currently located.
      */
@@ -64,14 +73,18 @@ public class Taxi
     }
 
     /**
-     * Get the location.
-     * @return .
+     * Get the passenger.
+     * @return the passenger who is in the taxi right now.
      */
     public Passenger getPassenger()
     {
         return passenger;
     }
 
+    /**
+     *Receive a passenger. This will be the name of the passenger who is in the taxi.
+     *@param the passenger name
+     */
     public void setPassenger(Passenger passenger){
         this.passenger = passenger;
     }
@@ -151,10 +164,42 @@ public class Taxi
     }
 
     /**
+     * Receive a number of steps. This becomes the steps this vehicle has been idle.
+     * @param a number of steps.
+     */
+    public void setIdleCount(int idleCount)
+    {
+        this.idleCount=idleCount;
+    }
+
+    /**
      * @return on how many passengers this vehicle has transported.
      */
     public int getPassengersTransported(){
         return passengersTransported;
+    }
+
+    /**
+     * Receive a number of passengers. This becomes the number of passengers this vehicle has trasnported.
+     * @param a number of steps.
+     */
+    public void setPassengersTransported(int passengersTransported){
+        this.passengersTransported=passengersTransported;
+    }
+
+    /**
+     * @return the company that the taxi is from.
+     */
+    public TransportCompany getCompany(){
+        return this.company;
+    }
+
+    /**
+     * Receive a company. This becomes the company where the taxi is from has been idle.
+     * @param the company.
+     */
+    public void setCompany(TransportCompany c){
+        company=c;
     }
 
     /**
@@ -185,9 +230,6 @@ public class Taxi
         if(passenger == null){
             free = true;
         }
-        else{
-            System.out.println ("El taxi que ha solicitado esta ocupado");
-        }
         return free;
     }
 
@@ -209,7 +251,8 @@ public class Taxi
 
     /**
      * Receive a passenger.
-     * Set passenger's destination as its target location.
+     * Set passenger's destination as its target location. Also set the name of the taxi where the passenger will be transported 
+     *                                                     and set the taxi's`passenger.
      * @param passenger The passenger.
      */
     public void pickup(Passenger passenger)
@@ -264,24 +307,19 @@ public class Taxi
             incrementIdleCount();
         }
         else{
-            if(this.getLocation() == this.getLocation() && passenger == null){
-            Location lo = this.getLocation();
-            System.out.println ("Taxi "+ this.getName() + " at "+ this.getLocation()+ " go to pick up "
-            +company.getPassengers().get(0).getName()+ " at " + this.getTargetLocation());
-        }
-            while(!location.equals(targetLocation)){
-                location = location.nextLocation(targetLocation);
-                System.out.println(this.getName() +" moving to:"+ location);
-            }
-            if(passenger==null){
-                notifyPickupArrival();
-              
-            }
-            else{
-                notifyPassengerArrival(passenger);
-                offloadPassenger();
-                incrementPassengersTransported();
+            location = location.nextLocation(targetLocation);
+            System.out.println(this.getName() +" moving to:"+ location);
+            if(this.location.equals(this.targetLocation)){
+                if(isFree()){
+                    notifyPickupArrival();
 
+                }
+                else{
+                    notifyPassengerArrival(passenger);
+                    offloadPassenger();
+                    incrementPassengersTransported();
+
+                }
             }
         }
     }
