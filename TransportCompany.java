@@ -116,8 +116,7 @@ public class TransportCompany
      */
     public void arrivedAtPickup(Taxi taxi)
     {
-        int i = 0;
-        /*boolean enc=false;
+        boolean enc=false;
         Taxi t = null;
         Assignment a = null;
         Passenger p = null;
@@ -131,12 +130,12 @@ public class TransportCompany
                 enc = true;
 
             }
-        }*/
-        if(taxi != null){
-            taxi.pickup(assignments.get(i).getPassenger());
-            System.out.println("<<<< Taxi "+taxi.getName() +" at location "+ taxi.getLocation()+" pick up "
-            + assignments.get(0).getPassenger().getName());
-            assignments.remove(0);
+        }
+        if(t!= null ){
+            t.pickup(p);
+            System.out.println("<<<< Taxi "+t.getName() +" at location "+ t.getLocation()+" pick up "
+            + p.getName());
+            
         }
     }
 
