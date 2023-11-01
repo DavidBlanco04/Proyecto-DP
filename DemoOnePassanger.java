@@ -104,18 +104,20 @@ public class DemoOnePassanger
 
         System.out.println("--->> Simulation of the company: "+company.getName()+" <<---");
         System.out.println("-->> Taxis of the company <<--");
-        //System.out.println(company.getVehicles());
-        //para ordenar una colección aplicando un comparador, esta sería 
-        //la sintaxis (suponiendo que "passengers" es una colección donde
-        //la compañía de taxis almacena los pasajero/as):
-        System.out.println("-->> Passengers requesting taxi <<--");
-        for(Taxi t:company.getVehicles()){
-        System.out.println(t);
+        Collections.sort(company.getVehicles(), new ComparadorNombreTaxi());
+        Iterator<Taxi> itTa = company.getVehicles().iterator();
+        while(itTa.hasNext()){
+            Taxi t = itTa.next();
+            System.out.println(t);
         }
-
-        for(Passenger p:company.getPassengers()){
-        System.out.println(p);
-        }   
+        
+        System.out.println("-->> Passengers requesting taxi <<--");
+        Collections.sort(company.getPassengers(), new ComparadorNombrePassenger());
+        Iterator<Passenger> itPa = company.getPassengers().iterator();
+        while(itPa.hasNext()){
+            Passenger p = itPa.next();
+            System.out.println(p);
+        } 
         System.out.println("-->> ---------------- <<--");
     
         System.out.println("-->> Simulation start <<--");
@@ -127,10 +129,6 @@ public class DemoOnePassanger
      * Final info is showed with the information about taxis and passengers
      */
     private void showFinalInfo() {
-        //actors.get(0).setTargetLocation(company.getPassengers().get(0).getPickup());
-        //while (company.getVehicles().get(0).getLocation().equals(company.getPassengers().get(0).getDestination())){
-        //actors.get(0).act();
-        //}
         System.out.println("");
         System.out.println("-->> ----------------- <<--");
         System.out.println("-->> End of simulation <<--");        
@@ -138,13 +136,19 @@ public class DemoOnePassanger
         System.out.println("");
 
         System.out.println("-->> Taxis final information <<--");
-        for(Taxi t:company.getVehicles()){
-        System.out.println(t.showFinalInfo());
+        Collections.sort(company.getVehicles(), new ComparadorNumPassengers());
+        Iterator<Taxi> itTa = company.getVehicles().iterator();
+        while(itTa.hasNext()){
+            Taxi t = itTa.next();
+            System.out.println(t.showFinalInfo());
         }
-
-        for(Passenger p:company.getPassengers()){
-        System.out.println(p.showFinalInfo());
-        }
+        
+        System.out.println("-->> Passengers final information <<--");
+        Iterator<Passenger> itPa = company.getPassengers().iterator();
+        while(itPa.hasNext()){
+            Passenger p = itPa.next();
+            System.out.println(p.showFinalInfo());
+        } 
 
     }
 }

@@ -184,7 +184,6 @@ public class Taxi
         boolean free = false;
         if(passenger == null){
             free = true;
-            //System.out.println ("El taxi que ha solicitado esta libre");
         }
         else{
             System.out.println ("El taxi que ha solicitado esta ocupado");
@@ -205,7 +204,7 @@ public class Taxi
      */
     public void notifyPassengerArrival(Passenger passenger)
     {
-        this.company.arrivedAtDestination(this, passenger);
+        System.out.println(this.company.arrivedAtDestination(this, passenger));
     }
 
     /**
@@ -265,13 +264,18 @@ public class Taxi
             incrementIdleCount();
         }
         else{
+            if(this.getLocation() == this.getLocation() && passenger == null){
+            Location lo = this.getLocation();
+            System.out.println ("Taxi "+ this.getName() + " at "+ this.getLocation()+ " go to pick up "
+            +company.getPassengers().get(0).getName()+ " at " + this.getTargetLocation());
+        }
             while(!location.equals(targetLocation)){
-                System.out.println(this +" moving to:"+ location);
                 location = location.nextLocation(targetLocation);
+                System.out.println(this.getName() +" moving to:"+ location);
             }
             if(passenger==null){
                 notifyPickupArrival();
-                //pickup(passenger);
+              
             }
             else{
                 notifyPassengerArrival(passenger);
@@ -288,9 +292,9 @@ public class Taxi
      */
     public String showFinalInfo()
     {
-        return ("Taxi name: "+ getName() +" "+"Location: " + getLocation() 
-            + " " + "Number of passenger transported: " + getPassengersTransported()
-            + " " + "Number of inactive steps: " + getIdleCount());
+        return ("Taxi "+ getName() + " at " + getLocation() 
+            + " Passengers transported: " + getPassengersTransported()
+            + " - non active for: " + getIdleCount() + " times");
 
     }
 

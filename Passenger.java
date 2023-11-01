@@ -94,7 +94,7 @@ public class Passenger
      */
     public String showFinalInfo()
     {
-        return ("Passenger name: "+ getName() +" "+"Destination: " + getDestination() + " " + "Taxi name: " + getTaxiName());
+        return ("Passenger: "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName());
     }
 
 }

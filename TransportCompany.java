@@ -85,9 +85,9 @@ public class TransportCompany
         }
         Collections.sort(aux, new ComparadorDistanciaTaxi());
         libre = aux.get(0);
-            for(int i=1; i<aux.size();i++){
+        /*for(int i=1; i<aux.size();i++){
                 aux.get(i).setTargetLocation(null);
-        }
+        }*/
         return libre;
     }
 
@@ -116,10 +116,12 @@ public class TransportCompany
      */
     public void arrivedAtPickup(Taxi taxi)
     {
-        //boolean enc=false;
-        //Taxi t = null;
-        //Assignment a = null;
-        /*Iterator<Assignment> it=assignments.iterator();
+        int i = 0;
+        /*boolean enc=false;
+        Taxi t = null;
+        Assignment a = null;
+        Passenger p = null;
+        Iterator<Assignment> it=assignments.iterator();
         while (it.hasNext() && !enc){
             a = it.next();
             if(a.getTaxi().getName().equals(taxi.getName())){
@@ -131,18 +133,18 @@ public class TransportCompany
             }
         }*/
         if(taxi != null){
-            taxi.pickup(assignments.get(0).getPassenger());
-            //p.setTaxiName(t.getName());
-            System.out.println("<<<< Taxi"+taxi.getName() +"at location"+ taxi.getLocation()+"pick up" + assignments.get(0).getPassenger().getName());
+            taxi.pickup(assignments.get(i).getPassenger());
+            System.out.println("<<<< Taxi "+taxi.getName() +" at location "+ taxi.getLocation()+" pick up "
+            + assignments.get(0).getPassenger().getName());
+            assignments.remove(0);
         }
     }
 
     public String arrivedAtDestination(Taxi t, Passenger p)
     {
         String mensaje = " ";
-        mensaje=("Taxi" + t.getName() + "at" + t.getLocation()
-            + "offloads Passenger"+ p + "travelling from" +p.getPickup()
-            + "to" + p.getDestination());
+        mensaje=("Taxi " + t.getName() + " at " + t.getLocation()
+            + " offloads "+ p);
         return mensaje;
     }
 }
