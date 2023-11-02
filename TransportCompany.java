@@ -46,7 +46,7 @@ public class TransportCompany
     /**
      * @return The list of vehicles.
      */
-    public List<Taxi> getVehicles()
+    public ArrayList<Taxi> getVehicles()
     {       
         return vehicles;
     }
@@ -54,7 +54,7 @@ public class TransportCompany
     /**
      * @return The list of passengers.
      */
-    public List<Passenger> getPassengers()
+    public ArrayList<Passenger> getPassengers()
     { 
         return passengers;
     }
@@ -91,50 +91,24 @@ public class TransportCompany
      */
     private Taxi scheduleVehicle(Location location)
     {
+        Taxi libre = null;
+        boolean enc=true;
         ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
         c.setLocation(location);
-        Collections.sort(vehicles, c);
-        Taxi libre=null;
-        for(int i=0; i<this.vehicles.size() && libre==null;i++){
-            Taxi t=vehicles.get(i);
-            if(t.isFree()){
-                if(this.assignments.size()==0){
-                    libre=t;
-                }
-                else{
-                    boolean enc=true;
-                    for(int j=0; j<this.assignments.size();j++){
-                        if(this.assignments.get(j).getTaxi().getName().equals(t.getName())){
-                            enc=false;
-                        }
-                    }
-                    if(enc){
-                        libre=t;
-                    }
-
-                }
+        Collections.sort(this.vehicles, c);
+        for(int i=0; i<this.vehicles.size() && enc ;i++){
+            Taxi t=this.vehicles.get(i);
+            for(int j=0; j<this.assignments.size();j++){
+                if(assignments.get(j).getTaxi().getName().equals(t.getName())){
+                    enc=false;
+                }    
+            }
+            if(enc){
+                libre=t;
             }
         }
         return libre;
     }
-    /*Taxi libre=null;
-    boolean enc=true;
-    ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
-    c.setLocation(location);
-    Collections.sort(vehicles, c);
-    for(int i=0; i<this.vehicles.size() && enc;i++){
-    Taxi t=vehicles.get(i);
-    for(int j=0; j<this.assignments.size();j++){
-    if(assignments.get(j).getTaxi().getName().equals(t.getName()) && t.getPassenger()!=null){
-    enc=false;
-    }    
-    }
-    if(enc){
-    libre=t;
-    }
-    }
-    return libre;
-    }*/
 
     /**
      * Request a pickup for the given passenger.

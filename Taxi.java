@@ -252,7 +252,7 @@ public class Taxi
     /**
      * Receive a passenger.
      * Set passenger's destination as its target location. Also set the name of the taxi where the passenger will be transported 
-     *                                                     and set the taxi's`passenger.
+     *                                                     and set the taxi's passenger.
      * @param passenger The passenger.
      */
     public void pickup(Passenger passenger)
