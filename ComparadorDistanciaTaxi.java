@@ -17,7 +17,7 @@ public class ComparadorDistanciaTaxi implements Comparator<Taxi>
         if (t1.getLocation().distance(this.l)==t2.getLocation().distance(this.l)){
             return new ComparadorNombreTaxi().compare(t1,t2);
         }
-        else if(t1.getLocation().distance(this.l)<t2.getLocation().distance(this.l)){
+        else if(t1.getLocation().distance(this.l)>t2.getLocation().distance(this.l)){
             return 1;
         }
         else{

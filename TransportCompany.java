@@ -96,8 +96,9 @@ public class TransportCompany
         ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
         c.setLocation(location);
         Collections.sort(this.vehicles, c);
-        for(int i=0; i<this.vehicles.size() && enc ;i++){
+        for(int i=0; i<this.vehicles.size() && libre == null ;i++){
             Taxi t=this.vehicles.get(i);
+            enc = true;
             for(int j=0; j<this.assignments.size();j++){
                 if(assignments.get(j).getTaxi().getName().equals(t.getName())){
                     enc=false;

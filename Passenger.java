@@ -12,6 +12,9 @@ public class Passenger
     private Location pickup;
     private Location destination;
     private String taxiName;
+    private int arrivalTime;//Hora en la que le pasajero debería llegar a su destino.
+    private int creditCard;
+    private int high(10) low(5) reliable;
 
     /**
      * Constructor for objects of class Passenger
@@ -50,7 +53,23 @@ public class Passenger
     {
         return name;
     }
+    
+        /**
+     *Receive a name. This becomes the passenger's name.
+     *@param the passenger's name
+     */
+    public void setCreditCard(int creditCard){
+        this.creditCard = creditCard;
+    }
 
+    /**
+     * @return The name of the passenger.
+     */
+    public int getCreditCard()
+    {
+        return creditCard;
+    }
+    
     /**
      *Receive a location. This becomes the location where the passenger wants to go.
      *@param the destination location

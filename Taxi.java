@@ -22,6 +22,8 @@ public class Taxi
     //Total number of passengers that the taxi transport.
     private int passengersTransported;
     //TODO añadir campos necesarios
+    int valuation;//valoracion para cada taxi
+    int occupation;
 
     /**
      * Constructor of class Vehicle
