@@ -6,7 +6,7 @@
  * @version 2016.02.29
  * @version 2023.10.10 DP classes 
  */
-public class Passenger
+public abstract class Passenger
 {
     private String name;
     private Location pickup;
@@ -14,7 +14,7 @@ public class Passenger
     private String taxiName;
     private int arrivalTime;//Hora en la que le pasajero debería llegar a su destino.
     private int creditCard;
-    private int high(10) low(5) reliable;
+    private Reliable reliable;
 
     /**
      * Constructor for objects of class Passenger
@@ -23,7 +23,7 @@ public class Passenger
      * @param name The passenger's name
      * @throws NullPointerException If either location is null.
      */
-    public Passenger(Location pickup, Location destination, String name)
+    public Passenger(Location pickup, Location destination, String name, Reliable reliable)
     {
         if(pickup == null) {
             throw new NullPointerException("Pickup location");
@@ -34,6 +34,7 @@ public class Passenger
         this.pickup = pickup;
         this.destination = destination;
         this.name = name;
+        setReliable(reliable);
         this.taxiName = null;
 
     }
@@ -53,8 +54,8 @@ public class Passenger
     {
         return name;
     }
-    
-        /**
+
+    /**
      *Receive a name. This becomes the passenger's name.
      *@param the passenger's name
      */
@@ -69,7 +70,7 @@ public class Passenger
     {
         return creditCard;
     }
-    
+
     /**
      *Receive a location. This becomes the location where the passenger wants to go.
      *@param the destination location
@@ -129,11 +130,45 @@ public class Passenger
     }
 
     /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public Reliable getReliable(){
+        return reliable;
+    }
+
+    /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public int getValorReliable(){
+        return reliable.getValor();
+    }
+
+    /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public void setReliable(Reliable reliable){
+        this.reliable = reliable;
+    }
+
+    /**
      * Show the final information about the passenger, including the name of the taxi that used.
      */
     public String showFinalInfo()
     {
         return ("Passenger: "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName());
     }
+    
+    public abstract int pay(Taxi t);
+    
+    public int calculateEvaluationValue(Taxi t){
+         int a=getValorReliable() * 2;
+         t.setValuation(a);
+         return t.getValuation();
+    }
+    
+    public void act(Taxi t){
+        this.pay(t);
+        this.calculateEvaluationValue(t);
 
+    }
 }

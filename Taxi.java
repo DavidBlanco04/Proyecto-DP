@@ -1,3 +1,4 @@
+import java.util.TreeSet;
 /**
  * Model the common elements of taxis and shuttles.
  * 
@@ -18,20 +19,22 @@ public class Taxi
     //name of the taxi
     private String name; //TODO cambiar a private
     //the passenger who is in the taxi right now.
-    private Passenger passenger;
+    private TreeSet<Passenger> passenger;
     //Total number of passengers that the taxi transport.
     private int passengersTransported;
     //TODO añadir campos necesarios
     int valuation;//valoracion para cada taxi
+    
     int occupation;
-
+    
+    FuelConsumption fuelConsumption;
     /**
      * Constructor of class Vehicle
      * @param company The taxi company. Must not be null.
      * @param location The vehicle's starting point. Must not be null.
      * @throws NullPointerException If company or location is null.
      */
-    public Taxi(TransportCompany company, Location location, String name)
+    public Taxi(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
     {
         if(company == null) {
             throw new NullPointerException("company");
@@ -42,6 +45,7 @@ public class Taxi
         this.company = company;
         this.location = location;
         this.name = name;
+        setFuelConsumption(fuelConsumption);
         targetLocation = null;
         idleCount = 0;
         passenger = null;
@@ -80,7 +84,7 @@ public class Taxi
      */
     public Passenger getPassenger()
     {
-        return passenger;
+        return passenger.first();
     }
 
     /**
@@ -88,7 +92,7 @@ public class Taxi
      *@param the passenger name
      */
     public void setPassenger(Passenger passenger){
-        this.passenger = passenger;
+        this.passenger.first() = passenger;
     }
 
     /**
@@ -203,7 +207,42 @@ public class Taxi
     public void setCompany(TransportCompany c){
         company=c;
     }
-
+    
+        /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public int getValuation(){
+        return valuation;
+    }
+    
+        /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public void setValuation(int valuation){
+        this.valuation = valuation;
+    }
+    
+            /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public FuelConsumption getFuelConsumption(){
+        return fuelConsumption;
+    }
+    
+        /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public int getValorFuelConsumption(){
+        return fuelConsumption.getValor();
+    }
+    
+            /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public void setFuelConsumption(FuelConsumption fuelConsumption){
+        this.fuelConsumption = fuelConsumption;
+    }
+    
     /**
      * Increment the number of steps on which this vehicle
      * has been idle.
@@ -319,6 +358,7 @@ public class Taxi
                 else{
                     notifyPassengerArrival(passenger);
                     offloadPassenger();
+                    passenger.act(this);
                     incrementPassengersTransported();
 
                 }

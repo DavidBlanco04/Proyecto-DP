@@ -5,18 +5,17 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class PassengerNoVip extends Passenger
+public abstract class PassengerNoVip extends Passenger
 {
     // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class PassengerNoVip
      */
-    public PassengerNoVip(Location pickup, Location destination, String name)
+    public PassengerNoVip(Location pickup, Location destination, String name,Reliable reliable)
     {
         // initialise instance variables
-        super(pickup,destination,name);
+        super(pickup,destination,name,reliable);
     }
 
     /**
@@ -30,7 +29,9 @@ public class PassengerNoVip extends Passenger
         this.setCreditCard(this.getCreditCard()-30);
     }
     
-    public void calculateEvaluationValue(){
-        
+    public int calculateEvaluationValue(Taxi t){
+         int a=getValorReliable() * 2;
+         t.setValuation(a);
+         return t.getValuation();
     }
 }
