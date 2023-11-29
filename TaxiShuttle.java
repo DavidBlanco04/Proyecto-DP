@@ -7,14 +7,12 @@
  */
 public abstract class TaxiShuttle extends Taxi
 {
-    // instance variables - replace the example below with your own
 
     /**
      * Constructor for objects of class TaxiShuttle
      */
     public TaxiShuttle(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
     {
-        // initialise instance variables
         super(company,location,name, fuelConsumption);
     }
 
@@ -29,4 +27,8 @@ public abstract class TaxiShuttle extends Taxi
         int consumption =t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation()) ;
         return consumption;
     }
+    @Override
+    public void act(){
+    super.act();
+}
 }

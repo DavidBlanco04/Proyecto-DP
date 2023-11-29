@@ -7,7 +7,6 @@
  */
 public abstract class TaxiExclusive extends Taxi
 {
-    // instance variables - replace the example below with your own
     private int weight;
     private int popularity;
     /**
@@ -31,7 +30,12 @@ public abstract class TaxiExclusive extends Taxi
         int consumption = weight * t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation());
         return consumption;
     }
-    
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
     public void serPopularEnRedes(Taxi t){
         if(t.getPassenger().getCreditCard() > 20000){
             popularity =+ 4;
@@ -40,8 +44,15 @@ public abstract class TaxiExclusive extends Taxi
             popularity--;
         }
     }
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
     @Override
    public void act(){
-        
+        serPopularEnRedes(this);
+        super.act();
     }
 }

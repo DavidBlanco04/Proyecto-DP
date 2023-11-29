@@ -9,10 +9,10 @@ import java.util.*;
  */
 public class TransportCompany  
 {
-    private String name; //nombre de la compañía
+    private String name; //company name
     private ArrayList <Taxi> vehicles;
     private ArrayList <Passenger> passengers;
-    private ArrayList <Assignment> assignments;
+    private TreeMap <Taxi,Passenger> assignments;
 
     /**
      * Constructor for objects of class TransportCompany
@@ -22,7 +22,7 @@ public class TransportCompany
         this.name = name;
         this.vehicles = new ArrayList <Taxi>();
         this.passengers = new ArrayList <Passenger>();
-        this.assignments = new ArrayList <Assignment>();
+        this.assignments = new TreeMap <Taxi,Passenger>();
 
     }
 
@@ -62,7 +62,7 @@ public class TransportCompany
     /**
      * @return The list of assignments.
      */
-    public ArrayList <Assignment> getAssignment()
+    public TreeMap <Taxi,Passenger> getAssignment()
     { 
         return assignments;
     }
@@ -119,13 +119,13 @@ public class TransportCompany
     public boolean requestPickup(Passenger passenger)
     {
         boolean enc=false;
-        Assignment a=null;
+        //Assignment a=null;
         Taxi t=scheduleVehicle(passenger.getPickup());
         if(t!=null){
             t.setPickupLocation(passenger.getPickup());
             enc=true;
-            a=new Assignment(t,passenger);
-            assignments.add(a);
+            //a=new Assignment(t,passenger);
+            assignments.put(t,passenger);
             System.out.println (t.toString() + " go to pick up "
                 + passenger.getName()+ " at " + t.getTargetLocation());
         }

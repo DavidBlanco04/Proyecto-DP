@@ -9,23 +9,24 @@ import java.util.TreeSet;
 public abstract class Taxi 
 {
     // The Taxi Company of this Taxi.
-    private TransportCompany company;   //TODO cambiar a private
+    private TransportCompany company;   
     // Where the vehicle is.
-    private Location location;     //TODO cambiar a private
+    private Location location;     
     // Where the vehicle is headed.
-    private  Location targetLocation;   //TODO cambiar a private
-    // Record how often the vehicle has nothing to do.
+    private  Location targetLocation;   
+    //The position where the taxi where created initially
     private Location initialPosition;
-    private int idleCount;       //TODO cambiar a private
+    // Record how often the vehicle has nothing to do.
+    private int idleCount;    
     //name of the taxi
-    private String name; //TODO cambiar a private
+    private String name; 
     //the passenger who is in the taxi right now.
     private TreeSet<Passenger> passenger;
     //Total number of passengers that the taxi transport.
     private int passengersTransported;
-    //TODO añadir campos necesarios
-    int valuation;//valoracion para cada taxi
-    
+    //valuation for each taxi
+    int valuation;
+    //The maximum occupation of th taxi it must be a number between 1 and 4
     int occupation;
     
     FuelConsumption fuelConsumption;
