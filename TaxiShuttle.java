@@ -5,18 +5,17 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class TaxiShuttle extends Taxi
+public abstract class TaxiShuttle extends Taxi
 {
     // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class TaxiShuttle
      */
-    public TaxiShuttle(TransportCompany company, Location location, String name)
+    public TaxiShuttle(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
     {
         // initialise instance variables
-        super(company,location,name)
+        super(company,location,name, fuelConsumption);
     }
 
     /**
@@ -25,9 +24,9 @@ public class TaxiShuttle extends Taxi
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    public int sampleMethod(int y)
+    public int obtainComsumption(Taxi t)
     {
-        // put your code here
-        return x + y;
+        int consumption =t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation()) ;
+        return consumption;
     }
 }

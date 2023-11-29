@@ -6,7 +6,7 @@ import java.util.TreeSet;
  * @version 2016.02.29
  * @version 2023.10.10 DP classes 
  */
-public class Taxi 
+public abstract class Taxi 
 {
     // The Taxi Company of this Taxi.
     private TransportCompany company;   //TODO cambiar a private
@@ -15,6 +15,7 @@ public class Taxi
     // Where the vehicle is headed.
     private  Location targetLocation;   //TODO cambiar a private
     // Record how often the vehicle has nothing to do.
+    private Location initialPosition;
     private int idleCount;       //TODO cambiar a private
     //name of the taxi
     private String name; //TODO cambiar a private
@@ -45,10 +46,11 @@ public class Taxi
         this.company = company;
         this.location = location;
         this.name = name;
+        this.initialPosition = location;
         setFuelConsumption(fuelConsumption);
         targetLocation = null;
         idleCount = 0;
-        passenger = null;
+        passenger =null;
         passengersTransported = 0;
     }
 
@@ -92,7 +94,7 @@ public class Taxi
      *@param the passenger name
      */
     public void setPassenger(Passenger passenger){
-        this.passenger.first() = passenger;
+        this.passenger.add(passenger);
     }
 
     /**
@@ -134,7 +136,17 @@ public class Taxi
             throw new NullPointerException();
         }
     }
-
+    
+     /**
+     * Get the target location.
+     * @return Where this vehicle is currently headed, or null
+     *         if it is idle.
+     */
+    public Location getInitialPosition()
+    {
+        return initialPosition;
+    }
+    
     /**
      * Receive a pickup location. This becomes the
      * target location.
@@ -356,15 +368,17 @@ public class Taxi
 
                 }
                 else{
-                    notifyPassengerArrival(passenger);
+                    notifyPassengerArrival(passenger.first());
                     offloadPassenger();
-                    passenger.act(this);
+                    passenger.first().act(this);
                     incrementPassengersTransported();
 
                 }
             }
         }
     }
+    
+    public abstract int obtainConsumption();
 
     /**
      * Return details of the taxi, such as where it is.

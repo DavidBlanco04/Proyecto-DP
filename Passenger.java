@@ -150,6 +150,19 @@ public abstract class Passenger
         this.reliable = reliable;
     }
 
+     /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public int getArrivalTime(){
+        return arrivalTime;
+    }
+    
+    /**
+     *@return the name of the taxi where the passenger will be transported
+     */
+    public void setArrivalTime(int arrivalTime){
+        this.arrivalTime = arrivalTime;
+    }
     /**
      * Show the final information about the passenger, including the name of the taxi that used.
      */
