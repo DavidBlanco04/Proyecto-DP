@@ -51,7 +51,7 @@ public abstract class Taxi
         setFuelConsumption(fuelConsumption);
         targetLocation = null;
         idleCount = 0;
-        passenger =null;
+        passenger =new TreeSet< >(new ComparadorArrivalTime<Passenger>());
         passengersTransported = 0;
     }
 

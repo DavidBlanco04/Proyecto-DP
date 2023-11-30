@@ -7,7 +7,6 @@ import java.util.*;
  */
 public abstract class ComparadorArrivalTime implements Comparator<Passenger>
 {
-    // instance variables - replace the example below with your own
     /**
      * @return compares the taxis by their actual location to a destination location. 
      * If their distances from the destination location are equals they will be compared by their names in ascending order.

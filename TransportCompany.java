@@ -93,23 +93,27 @@ public  class TransportCompany
     {
         Taxi libre = null;
         boolean enc=true;
-        ComparadorDistanciaTaxi c= new ComparadorArrivalTime();
+        ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
         c.setLocation(location);
         Collections.sort(this.vehicles, c);
         for(int i=0; i<this.vehicles.size() && libre == null ;i++){
             Taxi t=this.vehicles.get(i);
             enc = true;
-            for (Map.Entry<Taxi, Passenger> a : assignments.entrySet()){ //Recorrer los pares{
+            for (Map.Entry<Taxi, Passenger> a : assignments.entrySet()){ 
                 if(a.getKey().getName().equals(t.getName())){
                     enc=false;
                 }    
             }
             if(enc){
-
-                libre=t;
+                if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 0){
+                    libre=t;
+                }
+                else if(t.getOccupation() < 4){
+                    libre = t;
+                }
             }
+            return libre;
         }
-        return libre;
     }
 
     /**
@@ -141,14 +145,15 @@ public  class TransportCompany
     {
         boolean enc=false;
         Taxi t = null;
-        Assignment a = null;
+        Map.Entry <Taxi,Passenger> a = null;
+        Set<Map.Entry <Taxi,Passenger>> entrada = assignments.entrySet();
         Passenger p = null;
-        Iterator<Assignment> it=assignments.iterator();
+        Iterator<Map.Entry <Taxi,Passenger>> it=entrada.iterator();
         while (it.hasNext() && !enc){
             a = it.next();
-            if(a.getTaxi().getName().equals(taxi.getName())){
-                t = a.getTaxi();
-                p = a.getPassenger();
+            if(a.getKey().getName().equals(taxi.getName())){
+                t = a.getKey();
+                p = a.getValue();
                 it.remove();
                 enc = true;
 
@@ -171,6 +176,10 @@ public  class TransportCompany
         String mensaje = " ";
         mensaje=("Taxi " + t.getName() + " at " + t.getLocation()
             + " offloads "+ p);
+        p.act(t);
+        if(assignments.containsValues()){
+            
+        }
         return mensaje;
     }
 }
