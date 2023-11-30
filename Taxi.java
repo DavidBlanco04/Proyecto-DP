@@ -256,6 +256,19 @@ public abstract class Taxi
         this.fuelConsumption = fuelConsumption;
     }
     
+            /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public int getOccupation(){
+        return occupation;
+    }
+    
+        /**
+     * @return on how many passengers this vehicle has transported.
+     */
+    public void setOccupation(int occupation){
+        this.occupation = occupation;
+    }
     /**
      * Increment the number of steps on which this vehicle
      * has been idle.

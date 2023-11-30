@@ -7,7 +7,7 @@ import java.util.*;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
-public class TransportCompany  
+public  class TransportCompany  
 {
     private String name; //company name
     private ArrayList <Taxi> vehicles;
@@ -93,18 +93,19 @@ public class TransportCompany
     {
         Taxi libre = null;
         boolean enc=true;
-        ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
+        ComparadorDistanciaTaxi c= new ComparadorArrivalTime();
         c.setLocation(location);
         Collections.sort(this.vehicles, c);
         for(int i=0; i<this.vehicles.size() && libre == null ;i++){
             Taxi t=this.vehicles.get(i);
             enc = true;
-            for(int j=0; j<this.assignments.size();j++){
-                if(assignments.get(j).getTaxi().getName().equals(t.getName())){
+            for (Map.Entry<Taxi, Passenger> a : assignments.entrySet()){ //Recorrer los pares{
+                if(a.getKey().getName().equals(t.getName())){
                     enc=false;
                 }    
             }
             if(enc){
+
                 libre=t;
             }
         }
