@@ -171,17 +171,16 @@ public abstract class Passenger
         return ("Passenger: "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName());
     }
     
-    public abstract int pay(Taxi t);
+    public abstract void pay();
     
-    public int calculateEvaluationValue(Taxi t){
+    public int calculateEvaluationValue(){
          int a=getValorReliable() * 2;
-         t.setValuation(a);
-         return t.getValuation();
+         return a;
     }
     
-    public void act(Taxi t){
-        this.pay(t);
-        this.calculateEvaluationValue(t);
+    public int act(){
+        pay();
+        return calculateEvaluationValue();
 
     }
 }

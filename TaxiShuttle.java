@@ -27,8 +27,4 @@ public abstract class TaxiShuttle extends Taxi
         int consumption =t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation()) ;
         return consumption;
     }
-    @Override
-    public void act(){
-    super.act();
-}
 }

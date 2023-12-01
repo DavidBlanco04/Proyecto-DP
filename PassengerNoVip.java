@@ -14,7 +14,6 @@ public abstract class PassengerNoVip extends Passenger
      */
     public PassengerNoVip(Location pickup, Location destination, String name,Reliable reliable)
     {
-        // initialise instance variables
         super(pickup,destination,name,reliable);
     }
 
@@ -24,14 +23,9 @@ public abstract class PassengerNoVip extends Passenger
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
+    @Override
     public void pay()
     {
         this.setCreditCard(this.getCreditCard()-30);
-    }
-    
-    public int calculateEvaluationValue(Taxi t){
-         int a=getValorReliable() * 2;
-         t.setValuation(a);
-         return t.getValuation();
     }
 }

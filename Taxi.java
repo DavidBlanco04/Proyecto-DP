@@ -51,7 +51,7 @@ public abstract class Taxi
         setFuelConsumption(fuelConsumption);
         targetLocation = null;
         idleCount = 0;
-        passenger =new TreeSet< >(new ComparadorArrivalTime<Passenger>());
+        passenger =new TreeSet< >(new ComparadorArrivalTime());
         passengersTransported = 0;
     }
 
@@ -293,11 +293,10 @@ public abstract class Taxi
      */
     public boolean isFree()
     {
-        boolean free = false;
-        if(passenger == null){
-            free = true;
+        if(occupation<4){
+            return true;
         }
-        return free;
+        return false;
     }
 
     /**
@@ -384,7 +383,6 @@ public abstract class Taxi
                 else{
                     notifyPassengerArrival(passenger.first());
                     offloadPassenger();
-                    passenger.first().act(this);
                     incrementPassengersTransported();
 
                 }

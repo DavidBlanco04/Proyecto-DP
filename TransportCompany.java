@@ -12,7 +12,7 @@ public  class TransportCompany
     private String name; //company name
     private ArrayList <Taxi> vehicles;
     private ArrayList <Passenger> passengers;
-    private TreeMap <Taxi,Passenger> assignments;
+    private HashMap <Taxi,TreeSet<Passenger>> assignments;
 
     /**
      * Constructor for objects of class TransportCompany
@@ -22,7 +22,7 @@ public  class TransportCompany
         this.name = name;
         this.vehicles = new ArrayList <Taxi>();
         this.passengers = new ArrayList <Passenger>();
-        this.assignments = new TreeMap <Taxi,Passenger>();
+        this.assignments = new HashMap <>();
 
     }
 
@@ -62,7 +62,7 @@ public  class TransportCompany
     /**
      * @return The list of assignments.
      */
-    public TreeMap <Taxi,Passenger> getAssignment()
+    public HashMap <Taxi,TreeSet<Passenger>> getAssignment()
     { 
         return assignments;
     }
@@ -83,37 +83,29 @@ public  class TransportCompany
     { 
         this.passengers.add(passenger);
     }
-
+    
     /**
      * Find a the most closed free vehicle to a location, if any.
      * @param location location to go
      * @return A free vehicle, or null if there is none.
      */
-    private Taxi scheduleVehicle(Location location)
+    private Taxi scheduleVehicle(Passenger p)
     {
         Taxi libre = null;
         boolean enc=true;
         ComparadorDistanciaTaxi c= new ComparadorDistanciaTaxi();
-        c.setLocation(location);
+        c.setLocation(p.getPickup());
         Collections.sort(this.vehicles, c);
-        for(int i=0; i<this.vehicles.size() && libre == null ;i++){
+        for(int i=0; i<this.vehicles.size() && libre == null;i++){
             Taxi t=this.vehicles.get(i);
-            enc = true;
-            for (Map.Entry<Taxi, Passenger> a : assignments.entrySet()){ 
-                if(a.getKey().getName().equals(t.getName())){
-                    enc=false;
-                }    
-            }
-            if(enc){
-                if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 0){
+                if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
                     libre=t;
                 }
-                else if(t.getOccupation() < 4){
+                else if(t.getOccupation() < 4 && t.isFree() && p.getCreditCard() < 200000 && t.getOccupation() > 1){
                     libre = t;
                 }
-            }
-            return libre;
         }
+        return libre;
     }
 
     /**
@@ -125,12 +117,16 @@ public  class TransportCompany
     {
         boolean enc=false;
         //Assignment a=null;
-        Taxi t=scheduleVehicle(passenger.getPickup());
+        Taxi t=scheduleVehicle(passenger);
+        TreeSet<Passenger>p =new TreeSet< >(new ComparadorArrivalTime());
         if(t!=null){
-            t.setPickupLocation(passenger.getPickup());
+            if(assignments.containsKey(t)){
+               p = assignments.get(t);
+               assignments.remove(t);
+             }  
             enc=true;
-            //a=new Assignment(t,passenger);
-            assignments.put(t,passenger);
+            assignments.put(t,p);
+            t.setPickupLocation(passenger.getPickup());
             System.out.println (t.toString() + " go to pick up "
                 + passenger.getName()+ " at " + t.getTargetLocation());
         }
@@ -145,10 +141,10 @@ public  class TransportCompany
     {
         boolean enc=false;
         Taxi t = null;
-        Map.Entry <Taxi,Passenger> a = null;
-        Set<Map.Entry <Taxi,Passenger>> entrada = assignments.entrySet();
-        Passenger p = null;
-        Iterator<Map.Entry <Taxi,Passenger>> it=entrada.iterator();
+        Map.Entry <Taxi,TreeSet<Passenger>> a = null;
+        Set<Map.Entry <Taxi,TreeSet<Passenger>>> entrada = assignments.entrySet();
+        TreeSet<Passenger>p = null;
+        Iterator<Map.Entry <Taxi,TreeSet<Passenger>>> it=entrada.iterator();
         while (it.hasNext() && !enc){
             a = it.next();
             if(a.getKey().getName().equals(taxi.getName())){
@@ -160,9 +156,9 @@ public  class TransportCompany
             }
         }
         if(t!= null ){
-            t.pickup(p);
+            t.pickup(p.first());
             System.out.println("<<<< Taxi "+t.getName() +" at location "+ t.getLocation()+" pick up "
-                + p.getName());
+                + p.first().getName());
 
         }
     }
@@ -174,11 +170,17 @@ public  class TransportCompany
     public String arrivedAtDestination(Taxi t, Passenger p)
     {
         String mensaje = " ";
+        if(assignments.containsKey(t)){
         mensaje=("Taxi " + t.getName() + " at " + t.getLocation()
             + " offloads "+ p);
-        p.act(t);
-        if(assignments.containsValues()){
-            
+            assignments.get(t).pollFirst();
+            t.setValuation(p.act());
+            if(assignments.get(t).size() >0){
+                t.setTargetLocation(assignments.get(t).first().getPickup());
+            }
+            else{
+                t.clearTargetLocation();
+            }
         }
         return mensaje;
     }

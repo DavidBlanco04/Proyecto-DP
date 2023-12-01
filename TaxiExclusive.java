@@ -12,10 +12,10 @@ public abstract class TaxiExclusive extends Taxi
     /**
      * Constructor for objects of class TaxiExclusive
      */
-    public TaxiExclusive(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
+    public TaxiExclusive(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption, int weight)
     {
         super(company,location,name,fuelConsumption);
-        weight = 0;
+        this.weight = weight;
         popularity = 6;
     }
 

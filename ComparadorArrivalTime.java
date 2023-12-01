@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class ComparadorArrivalTime implements Comparator<Passenger>
+public class ComparadorArrivalTime implements Comparator<Passenger>
 {
     /**
      * @return compares the taxis by their actual location to a destination location. 
