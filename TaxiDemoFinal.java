@@ -1,4 +1,6 @@
+import java.util.*;
 /**
+ /**
  * Provide a simple demonstration of running a stage-one
  * scenario. Three simulaions are create: 
 
@@ -17,24 +19,30 @@
  * @author DP Clasess
  * @version 2023
  */
-public class TaxiDemo
+public class TaxiDemoFinal
 {
     public static final int MAXX = 20; //Valor máximo de número de filas 
     public static final int MAXY = 20; //Valor máximo de número de columnas
+    //Entrega Final   ----------------------
+    //--------------------------------------
+    public static final int CREDITCARDDECREMENTNOVIP = 30;
+    public static final int CREDITCARDDECREMENTVIP = 600;
+    public static final int LIMITTOBEPOPULAR = 20000;
 
-    public static void main() {
+    
+    public static void main(String [] args) {
         //Comentar o descomentar cada demo para ser ejecutada
 
-        //Demo con 1 personaje y 1 taxi
-        //DemoOnePassanger demoOne = new DemoOnePassanger();
-        //demoOne.run();
+        //Demo con 2 personajes y 2 taxis
+        DemoTwoPassengers demoOne = new DemoTwoPassengers();
+        demoOne.run();
 
-        //Demo con 2 personajes y 3 taxis
-        //DemoInicial demoIni = new DemoInicial();
+        //Demo con 3 personajes y 3 taxis
+        //DemoInicialFinal demoIni = new DemoInicialFinal();
         //demoIni.run();
 
         //Demo con varios personajes y taxis
-        DemoAvanzada demoAvan = new DemoAvanzada();
-        demoAvan.run();
+        //DemoAvanzadaFinal demoAvan = new DemoAvanzadaFinal();
+        //demoAvan.run();
     }
 }
