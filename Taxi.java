@@ -1,10 +1,6 @@
 import java.util.TreeSet;
 /**
- * Model the common elements of taxis and shuttles.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
- * @version 2023.10.10 DP classes 
+ *This is the Taxi class 
  */
 public abstract class Taxi 
 {
@@ -317,8 +313,9 @@ public abstract class Taxi
 
     /**
      * Receive a passenger.
-     * Set passenger's destination as its target location. Also set the name of the taxi where the passenger will be transported 
-     *                                                     and set the taxi's passenger.
+     * Set passenger's destination as its target location. 
+     * Also set the name of the taxi where the passenger will be transported 
+     * and set the taxi's passenger.
      * @param passenger The passenger.
      */
     public void pickup(Passenger passenger)
@@ -390,6 +387,10 @@ public abstract class Taxi
         }
     }
     
+    /**
+     * Return details of the taxi, such as where it is.
+     * @return A string representation of the taxi.
+     */
     public abstract int obtainConsumption();
 
     /**

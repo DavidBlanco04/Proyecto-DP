@@ -1,14 +1,10 @@
 
 /**
- * Write a description of class PassengerVip here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the class 'Passengers VIP' which has the same characteristics that
+ * the superclass which belongs to (Passenger) but with other new ones.
  */
 public abstract class PassengerVip extends Passenger
 {
-    // instance variables - replace the example below with your own
-
     /**
      * Constructor for objects of class PassengerVip
      */
@@ -18,17 +14,20 @@ public abstract class PassengerVip extends Passenger
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * The passanger pays 600 euros for the transport because this kind of 
+     * passenger makes very exclusive trips. The passanger also gives a 10 
+     * euros tip to the driver.
      */
     @Override
     public void pay()
     {
         this.setCreditCard(this.getCreditCard()-610);
     }
-    
+    /**
+     * This method calculates the valuation of the vehicle such the rest of
+     * passengers but incrementing it in 15 points.
+     * @return 
+     */
     public int calculateEvaluationValue(){
          return super.calculateEvaluationValue()+15;
     }

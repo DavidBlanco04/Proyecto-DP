@@ -1,13 +1,10 @@
 
 /**
- * Write a description of class PassengerNoVip here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the class 'Passengers VIP' which has the same characteristics that
+ * the superclass which belongs to (Passenger) but with other way to pay.
  */
 public abstract class PassengerNoVip extends Passenger
 {
-    // instance variables - replace the example below with your own
 
     /**
      * Constructor for objects of class PassengerNoVip
@@ -18,10 +15,8 @@ public abstract class PassengerNoVip extends Passenger
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * The passenger pays the transport and the money on his/her credit card
+     * is reduced on 30 euros.
      */
     @Override
     public void pay()

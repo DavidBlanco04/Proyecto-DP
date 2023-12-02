@@ -1,10 +1,5 @@
 /**
- * Model a passenger wishing to get from one
- * location to another.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
- * @version 2023.10.10 DP classes 
+ *This is the Passenger class 
  */
 public abstract class Passenger
 {
@@ -187,8 +182,8 @@ public abstract class Passenger
          return a;
     }
     /**
-     * This method allows the passenger to pay the transport service and valuate
-     * the vehicle where was transported invoking the last two methods
+     * This method allows the passenger to pay the transport service and 
+     * valuate the vehicle where was transported invoking the last two methods
      * @return the vehicle's valuation
      */
     public int act(){
