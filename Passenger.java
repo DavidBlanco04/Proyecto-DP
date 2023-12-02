@@ -130,35 +130,37 @@ public abstract class Passenger
     }
 
     /**
-     *@return the name of the taxi where the passenger will be transported
+     *@return a enum that represents the reliability of the passenger
      */
     public Reliable getReliable(){
         return reliable;
     }
 
     /**
-     *@return the name of the taxi where the passenger will be transported
+     *@return the value of the reliability of the passenger
      */
     public int getValorReliable(){
         return reliable.getValor();
     }
 
     /**
-     *@return the name of the taxi where the passenger will be transported
+     *Recieves a reliability. This will be the reliability of the passenger. 
+     *@param the new reliability of the vehicle's passenger
      */
     public void setReliable(Reliable reliable){
         this.reliable = reliable;
     }
 
      /**
-     *@return the name of the taxi where the passenger will be transported
+     *@return the time when the passenger should arrive at their destination.
      */
     public int getArrivalTime(){
         return arrivalTime;
     }
     
     /**
-     *@return the name of the taxi where the passenger will be transported
+     *Recieves an hour. This becomes the passenger's arrival time. 
+     *@param the hour when the passenger should arrive at their destination.
      */
     public void setArrivalTime(int arrivalTime){
         this.arrivalTime = arrivalTime;
@@ -170,14 +172,25 @@ public abstract class Passenger
     {
         return ("Passenger: "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName());
     }
-    
+    /**
+     * This method allows a passenger to pay the vehicle where was trasnported.
+     * Each type of passenger pays in a different way.
+     */
     public abstract void pay();
-    
+    /**
+     * This method increments the vehicle's valuation with the double of the 
+     * passengers reliability value.
+     * @return the vehicle's valuation where the passenger traveled
+     */
     public int calculateEvaluationValue(){
          int a=getValorReliable() * 2;
          return a;
     }
-    
+    /**
+     * This method allows the passenger to pay the transport service and valuate
+     * the vehicle where was transported invoking the last two methods
+     * @return the vehicle's valuation
+     */
     public int act(){
         pay();
         return calculateEvaluationValue();

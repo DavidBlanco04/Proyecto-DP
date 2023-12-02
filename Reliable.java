@@ -7,7 +7,6 @@
  */
 public enum Reliable
 {
-    // instance variables - replace the example below with your own
     HIGH("High",10),
     LOW("Low",5);
     
@@ -18,35 +17,28 @@ public enum Reliable
      */
     Reliable(String nombre, int valor)
     {
-        // initialise instance variables
         this.nombre = nombre;
         this.valor = valor;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @return the type of the reliability. It could be 'high', 'medium' or 'low'
      */
     public String getNombre()
     {
-        // put your code here
         return nombre;
     }
     
-        /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+    /**
+     * @return The value of the passenger's reability. 
      */
     public int getValor()
     {
-        // put your code here
         return valor;
     }
-    
+    /**
+     * Shows all the information (type and value) of the passenger's reability. 
+     */
     public String showInfoReliable(){
         return "<reliable: "+ getNombre() + "(value:" + getValor() + ")>"; 
     }
