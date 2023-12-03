@@ -1,13 +1,11 @@
 
 /**
- * Write a description of class TaxiShuttle here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the class 'Taxi Shuttle' which has the same characteristics that
+ * the superclass which belongs to (Taxi) but with other way to calculate the
+ * fuel consumption and with a maximum occupation of 4 people. 
  */
 public abstract class TaxiShuttle extends Taxi
 {
-
     /**
      * Constructor for objects of class TaxiShuttle
      */
@@ -17,10 +15,10 @@ public abstract class TaxiShuttle extends Taxi
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * This method calculates the fuel consumption of the vehicle, multiplying
+     * its average fuel consumtion by the total distance traveled.
+     * @param the taxi which we want to calculate its fuel consumption.
+     * @return returns the fuel consumption made.
      */
     public int obtainComsumption(Taxi t)
     {

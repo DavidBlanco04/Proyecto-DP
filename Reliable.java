@@ -1,9 +1,6 @@
 
 /**
- * Write a description of class Reliable here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is a enum which represents the level of reliability of a passenger
  */
 public enum Reliable
 {
@@ -22,7 +19,7 @@ public enum Reliable
     }
 
     /**
-     * @return the type of the reliability. It could be 'high', 'medium' or 'low'
+     * @return the type of the reliability. It could be 'high' or 'low'.
      */
     public String getNombre()
     {

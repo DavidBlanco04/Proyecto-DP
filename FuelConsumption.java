@@ -1,13 +1,9 @@
 
 /**
- * Write a description of class fuelConsumption here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is a enum which represents the level of fuel consumption of a vehicle.
  */
 public enum FuelConsumption
 {
-    // instance variables - replace the example below with your own
     HIGH("High",8),
     MEDIUM("Medium",6),
     LOW("Low",4);
@@ -15,39 +11,33 @@ public enum FuelConsumption
     private final String nombre;
     private final int valor;
     /**
-     * Constructor for objects of class Reliable
+     * Constructor for objects of enum FuelConsumption
      */
     FuelConsumption(String nombre, int valor)
     {
-        // initialise instance variables
         this.nombre = nombre;
         this.valor = valor;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @return the type of fuel consumption. It can be 'high', 'medium' or 'low'.
      */
     public String getNombre()
     {
-        // put your code here
         return nombre;
     }
     
-        /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+    /**
+     * @return the value of vehicle's fuel consumption.
      */
     public int getValor()
     {
-        // put your code here
         return valor;
     }
-    
+    /**
+     * Shows all the information (type and value) of the vehicles's fuel
+     * consumption
+     */
     public String showInfoFuelConsumption(){
         return "<fuel consumption: "+ getNombre() + "(value:" + getValor() + ")>"; 
     }

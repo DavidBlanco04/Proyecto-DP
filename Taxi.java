@@ -30,6 +30,9 @@ public abstract class Taxi
      * Constructor of class Vehicle
      * @param company The taxi company. Must not be null.
      * @param location The vehicle's starting point. Must not be null.
+     * @param name. The vehicle's name. Must not be null.
+     * @param fuelConsumption. The average vehicle fuel consumption. 
+     * Must not be null.
      * @throws NullPointerException If company or location is null.
      */
     public Taxi(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
@@ -87,7 +90,7 @@ public abstract class Taxi
     }
 
     /**
-     *Receive a passenger. This will be the name of the passenger who is in the taxi.
+     *Receive a passenger. This passenger will be added to the passengers set.
      *@param the passenger name
      */
     public void setPassenger(Passenger passenger){
@@ -135,9 +138,7 @@ public abstract class Taxi
     }
     
      /**
-     * Get the target location.
-     * @return Where this vehicle is currently headed, or null
-     *         if it is idle.
+     * @return Where this vehicle where created initially.
      */
     public Location getInitialPosition()
     {
@@ -179,7 +180,8 @@ public abstract class Taxi
     }
 
     /**
-     * Receive a number of steps. This becomes the steps this vehicle has been idle.
+     * Receive a number of steps. This becomes the steps this vehicle has been 
+     * idle.
      * @param a number of steps.
      */
     public void setIdleCount(int idleCount)
@@ -195,7 +197,8 @@ public abstract class Taxi
     }
 
     /**
-     * Receive a number of passengers. This becomes the number of passengers this vehicle has trasnported.
+     * Receive a number of passengers. This becomes the number of passengers 
+     * this vehicle has trasnported.
      * @param a number of steps.
      */
     public void setPassengersTransported(int passengersTransported){
@@ -210,57 +213,62 @@ public abstract class Taxi
     }
 
     /**
-     * Receive a company. This becomes the company where the taxi is from has been idle.
+     * Receive a company. This becomes the company where the taxi is from has 
+     * been idle.
      * @param the company.
      */
     public void setCompany(TransportCompany c){
         company=c;
     }
     
-        /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * @return the valuation of the vehicle.
      */
     public int getValuation(){
         return valuation;
     }
     
-        /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * Recieve a valuation. This becomes the valuation of a vehicle.
+     * @param the valuation that the passengers give to a vehicle.
      */
     public void setValuation(int valuation){
         this.valuation = valuation;
     }
     
-            /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * @return a enum that represents the average vehicle fuel consumption.
      */
     public FuelConsumption getFuelConsumption(){
         return fuelConsumption;
     }
     
-        /**
-     *@return the name of the taxi where the passenger will be transported
+    /**
+     *@return the exact value of the average vehicle fuel consumption.
      */
     public int getValorFuelConsumption(){
         return fuelConsumption.getValor();
     }
     
-            /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * Recieve a fuel consumption amount. This becomes the vehicle fuel 
+     * consumption
+     * @param The average vehicle fuel consumption.
      */
     public void setFuelConsumption(FuelConsumption fuelConsumption){
         this.fuelConsumption = fuelConsumption;
     }
     
-            /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * @return the maximum occupation of a taxi.
      */
     public int getOccupation(){
         return occupation;
     }
     
-        /**
-     * @return on how many passengers this vehicle has transported.
+    /**
+     * Recieve a number. This will be the maximum occupation of the taxi. 
+     * @param An integer that represents the maximum occupation of the vehicle.
      */
     public void setOccupation(int occupation){
         this.occupation = occupation;
@@ -388,8 +396,9 @@ public abstract class Taxi
     }
     
     /**
-     * Return details of the taxi, such as where it is.
-     * @return A string representation of the taxi.
+     *returns the fuel consumption made. Each type of taxi will 
+     *calculate this consumption in a different way.
+     * @return The fuel consumtion of the taxi.
      */
     public abstract int obtainConsumption();
 

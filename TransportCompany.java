@@ -60,7 +60,8 @@ public  class TransportCompany
     }
 
     /**
-     * @return The list of assignments.
+     * @return The map of assignments which its key (Taxi object) and 
+     * value(a TreeSet of Passenger objects).
      */
     public HashMap <Taxi,TreeSet<Passenger>> getAssignment()
     { 
@@ -68,7 +69,8 @@ public  class TransportCompany
     }
 
     /**
-     * @param Add the new Vehicle.
+     * Add a new Vehicle int he company.
+     * @param The new Vehicle.
      */
     public void addVehicle(Taxi vehicle)
     {
@@ -77,7 +79,7 @@ public  class TransportCompany
 
     /**
      * Add a new passenger in the company.
-     * @param passenger The new passenger.
+     * @param The new passenger.
      */
     public void addPassenger(Passenger passenger)
     { 
@@ -85,8 +87,8 @@ public  class TransportCompany
     }
     
     /**
-     * Find a the most closed free vehicle to a location, if any.
-     * @param location location to go
+     * Find the most closed free vehicle to a location, if any.
+     * @param the passenger which the taxi want to pickup
      * @return A free vehicle, or null if there is none.
      */
     private Taxi scheduleVehicle(Passenger p)
@@ -116,7 +118,6 @@ public  class TransportCompany
     public boolean requestPickup(Passenger passenger)
     {
         boolean enc=false;
-        //Assignment a=null;
         Taxi t=scheduleVehicle(passenger);
         TreeSet<Passenger>p =new TreeSet< >(new ComparadorArrivalTime());
         if(t!=null){
@@ -135,7 +136,7 @@ public  class TransportCompany
 
     /**
      * A vehicle has arrived at a pickup point.
-     * @param vehicle The vehicle at the pickup point.
+     * @param The vehicle at the pickup point.
      */
     public void arrivedAtPickup(Taxi taxi)
     {
@@ -165,14 +166,15 @@ public  class TransportCompany
 
     /**
      * Show a message when the taxi arrives to the destination location
-     * @param the taxi where trasnport the passenger and the passenger who is transpoted in this taxi.
+     * @param t:the taxi where trasnport the passenger and p:the passenger who is transported in this taxi.
+     * @return mensaje: show a message with all the information of the trip (driver, passenger/s, initial location, destination)
      */
     public String arrivedAtDestination(Taxi t, Passenger p)
     {
         String mensaje = " ";
         if(assignments.containsKey(t)){
         mensaje=("Taxi " + t.getName() + " at " + t.getLocation()
-            + " offloads "+ p);
+            + " offloads Passenger"+ p);
             assignments.get(t).pollFirst();
             t.setValuation(p.act());
             if(assignments.get(t).size() >0){

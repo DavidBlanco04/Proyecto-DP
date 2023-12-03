@@ -1,9 +1,8 @@
 
 /**
- * Write a description of class TaxiExclsuive here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the class 'Taxi Exclusive' which has the same characteristics that
+ * the superclass which belongs to (Taxi). This kind of taxi has its own 
+ * propierties such as its weight and its level of popularity on social networks. 
  */
 public abstract class TaxiExclusive extends Taxi
 {
@@ -20,21 +19,21 @@ public abstract class TaxiExclusive extends Taxi
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * This method calculates the fuel consumption of the vehicle, multiplying
+     * the half of its weight by its average fuel consumtion by the total 
+     * distance traveled.
+     * @param the taxi which we want to calculate its fuel consumption.
+     * @return returns the fuel consumption made.
      */
     public int obtainComsumption(Taxi t)
     {
-        int consumption = weight * t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation());
+        int consumption = (weight/2) * t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation());
         return consumption;
     }
+
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * This method increases or decreases the vehicle's popularity on social 
+     * networks depending on the vehicle's  valoration.  
      */
     public void serPopularEnRedes(Taxi t){
         if(t.getPassenger().getCreditCard() > 20000){
@@ -44,14 +43,13 @@ public abstract class TaxiExclusive extends Taxi
             popularity--;
         }
     }
+
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Carry out a taxi's actions after increase or decrease the vehicle's
+     * popularity on social networks.
      */
     @Override
-   public void act(){
+    public void act(){
         serPopularEnRedes(this);
         super.act();
     }
