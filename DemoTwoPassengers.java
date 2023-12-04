@@ -9,10 +9,10 @@ import java.util.*;
  * @version 2016.02.29
  * @version 2023 DP Classes
  */
-public class DemoTwoPassengers
+public  class DemoTwoPassengers
 {
      TransportCompany company;
-    private List<Actor> actors;
+    private List<Taxi> actors;
 
     /**
      * Constructor for objects of class DemoOnePassanger
@@ -43,7 +43,7 @@ public class DemoTwoPassengers
      */
     public void step()
     {
-        for(Actor actor : actors) {
+        for(Taxi actor : actors) {
             actor.act();
         }
     }
@@ -117,7 +117,7 @@ public class DemoTwoPassengers
             System.out.println(taxi);
         }
         System.out.println("-->> Passengers requesting taxi <<--");
-        Collections.sort(passengers, new ComparadorPasHoraLlegada());
+        Collections.sort(passengers, new ComparadorArrivalTime());
 
         for(Passenger passenger : passengers) {
             System.out.println(passenger);
@@ -135,7 +135,7 @@ public class DemoTwoPassengers
     private void showFinalInfo() {
         List<Taxi> vehicles = company.getVehicles();
         List<Passenger> passengers = company.getPassengers();
-        Collections.sort(vehicles, new ComparadorPasTransportadosTaxi());
+        Collections.sort(vehicles, new ComparadorNumPassengers());
         Collections.sort(passengers, new ComparadorNombrePassenger());
 
         System.out.println("");
