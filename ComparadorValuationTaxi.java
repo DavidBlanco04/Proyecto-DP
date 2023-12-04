@@ -9,13 +9,15 @@ public class ComparadorValuationTaxi implements Comparator <Taxi>
      * @param t1 and t2:the taxis we will compare
      */
     public int compare(Taxi t1, Taxi t2)
-    { int result=0;
-      if(t1.getValuation()>t2.getValuation()){
-          result = 1;
-      }
-      else if(t1.getValuation()<t2.getValuation()){
-          result = -1;
-      }
-      return result;
+    { 
+        if(t1.getValuation()>t2.getValuation()){
+            return  1;
+        }
+        else if(t1.getValuation()<t2.getValuation()){
+            return -1;
+        }
+        else{
+            return (t1.getName().compareTo(t2.getName()));
+        }
     }
 }
