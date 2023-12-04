@@ -158,8 +158,8 @@ public  class TransportCompany
         }
         if(t!= null ){
             t.pickup(p.first());
-            System.out.println("<<<< Taxi "+t.getName() +" at location "+ t.getLocation()+" pick up "
-                + p.first().getName());
+            System.out.println("<<<< "+ t.getClass().getName()+ " "+t.getName() +" at location "+ t.getLocation()+ " occupation "+t.getOccupation()
+            +" pick up " + p.first().getName());
 
         }
     }
@@ -173,8 +173,8 @@ public  class TransportCompany
     {
         String mensaje = " ";
         if(assignments.containsKey(t)){
-        mensaje=("Taxi " + t.getName() + " at " + t.getLocation()
-            + " offloads Passenger"+ p);
+        mensaje=(t.getClass().getName()+ " "+ t.getName() + " at " + t.getLocation()
+            +" occupation " +t.getOccupation()+ " offloads" + p.toString());
             assignments.get(t).pollFirst();
             t.setValuation(p.act());
             if(assignments.get(t).size() >0){

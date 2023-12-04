@@ -89,8 +89,9 @@ public abstract class Passenger
      */
     public String toString()
     {
-        return "Passenger "+getName()+" travelling from " +
-        pickup + " to " + destination;
+        return getClass().getName()+ " " +getName()+" travelling from " +
+        pickup + " to " + destination + " arrival time: " + getArrivalTime()+ " money in the credit card: "+
+        getCreditCard()+ " <reliable: "+ getReliable() + " (value: "+ getValorReliable()+ ")>";
     }
 
     /**
@@ -165,7 +166,7 @@ public abstract class Passenger
      */
     public String showFinalInfo()
     {
-        return ("Passenger: "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName());
+        return (getClass().getName()+ " "+ getName() + " in " + getDestination() + " Transported by : " + getTaxiName()+ " with "+ getCreditCard()+ " money in the credit card");
     }
     /**
      * This method allows a passenger to pay the vehicle where was trasnported.

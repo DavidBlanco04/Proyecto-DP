@@ -16,7 +16,7 @@ public class DemoInicialFinal
     private int x;
 
     TransportCompany company;
-    private List<Actor> actors;
+    private List<Taxi> actors;
 
     /**
      * Constructor for objects of class DemoOnePassanger
@@ -47,7 +47,7 @@ public class DemoInicialFinal
      */
     public void step()
     {
-        for(Actor actor : actors) {
+        for(Taxi actor : actors) {
             actor.act();
         }
     }
@@ -142,7 +142,7 @@ public class DemoInicialFinal
     private void showFinalInfo() {
         List<Taxi> vehicles = company.getVehicles();
         List<Passenger> passengers = company.getPassengers();
-        Collections.sort(vehicles, new ComparadorPasTransportadosTaxi());
+        Collections.sort(vehicles, new ComparadorNumPassengers());
         Collections.sort(passengers, new ComparadorNombrePassenger());
         System.out.println("");
         System.out.println("-->> ----------------- <<--");
