@@ -85,7 +85,7 @@ public  class TransportCompany
     { 
         this.passengers.add(passenger);
     }
-    
+
     /**
      * Find the most closed free vehicle to a location, if any.
      * @param the passenger which the taxi want to pickup
@@ -100,12 +100,12 @@ public  class TransportCompany
         Collections.sort(this.vehicles, c);
         for(int i=0; i<this.vehicles.size() && libre == null;i++){
             Taxi t=this.vehicles.get(i);
-                if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
-                    libre=t;
-                }
-                else if(t.getOccupation() < 4 && t.isFree() && p.getCreditCard() < 200000 && t.getOccupation() > 1){
-                    libre = t;
-                }
+            if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
+                libre=t;
+            }
+            else if(t.getOccupation() < 4 && t.isFree() && p.getCreditCard() < 200000 && t.getOccupation() > 1){
+                libre = t;
+            }
         }
         return libre;
     }
@@ -122,9 +122,9 @@ public  class TransportCompany
         TreeSet<Passenger>p =new TreeSet< >(new ComparadorArrivalTime());
         if(t!=null){
             if(assignments.containsKey(t)){
-               p = assignments.get(t);
-               assignments.remove(t);
-             }  
+                p = assignments.get(t);
+                assignments.remove(t);
+            }  
             enc=true;
             assignments.put(t,p);
             t.setPickupLocation(passenger.getPickup());
@@ -159,7 +159,7 @@ public  class TransportCompany
         if(t!= null ){
             t.pickup(p.first());
             System.out.println("<<<< "+ t.getClass().getName()+ " "+t.getName() +" at location "+ t.getLocation()+ " occupation "+t.getOccupation()
-            +" pick up " + p.first().getName());
+                +" pick up " + p.first().getName());
 
         }
     }
@@ -173,8 +173,8 @@ public  class TransportCompany
     {
         String mensaje = " ";
         if(assignments.containsKey(t)){
-        mensaje=(t.getClass().getName()+ " "+ t.getName() + " at " + t.getLocation()
-            +" occupation " +t.getOccupation()+ " offloads" + p.toString());
+            mensaje=(t.getClass().getName()+ " "+ t.getName() + " at " + t.getLocation()
+                +" occupation " +t.getOccupation()+ " offloads" + p.toString());
             assignments.get(t).pollFirst();
             t.setValuation(p.act());
             if(assignments.get(t).size() >0){
@@ -185,6 +185,30 @@ public  class TransportCompany
             }
         }
         return mensaje;
+    }
+
+    /**
+     * Shows the taxi(s) that have been inactive for the least number of shifts
+    and the taxi(s) that has the highest valuation 
+     * @return mensaje: show a message with all the information of the trip (driver, passenger/s, initial location, destination)
+     */
+    public void showFinalInfo(){
+        Taxi v = null;
+        Taxi idle = null;
+        ComparadorValuationTaxi c1 = new ComparadorValuationTaxi();
+        ComparadorIdleTaxi c2 = new ComparadorIdleTaxi(); 
+        
+        Collections.sort(this.vehicles, c1);
+        v = this.vehicles.get(0);
+        
+        Collections.sort(this.vehicles, c2);
+        idle = this.vehicles.get(0);
+        
+        System.out.println("-->> Taxi(s) with less time not active <<--");
+        idle.showFinalInfo();
+        System.out.println("-->> Taxi(s) with highest evaluation <<--");
+        v.showFinalInfo();
+
     }
 }
  
