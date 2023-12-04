@@ -9,10 +9,10 @@ import java.util.*;
  * @version 2016.02.29
  * @version 2023 DP Classes
  */
-public class DemoTwoPassengers
+public  class DemoTwoPassengers
 {
      TransportCompany company;
-    private List<Actor> actors;
+    private List<Taxi> actors;
 
     /**
      * Constructor for objects of class DemoOnePassanger
@@ -43,7 +43,7 @@ public class DemoTwoPassengers
      */
     public void step()
     {
-        for(Actor actor : actors) {
+        for(Taxi actor : actors) {
             actor.act();
         }
     }

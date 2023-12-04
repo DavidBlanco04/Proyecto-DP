@@ -288,7 +288,9 @@ public abstract class Taxi
      */
     public String toString()
     {
-        return getClass().getName() + " " +getName()+" at " + getLocation();
+        return getClass().getName() + " " +getName()+" at location: " + getLocation()+ " occupation: "
+        + getOccupation()+ " <fuel consumption: "+ getFuelConsumption()+ " (value: "+ getValorFuelConsumption()
+        + ")>";
     }
 
     /**
@@ -408,9 +410,10 @@ public abstract class Taxi
      */
     public String showFinalInfo()
     {
-        return ("Taxi "+ getName() + " at " + getLocation() 
+        return (getClass().getName() +" "+ getName() + " at " + getLocation() 
             + " Passengers transported: " + getPassengersTransported()
-            + " - non active for: " + getIdleCount() + " times");
+            + " - non active for: " + getIdleCount() + " times - valuation: "+ getValuation()
+            + " - consumption: "+ getValorFuelConsumption());
 
     }
 
