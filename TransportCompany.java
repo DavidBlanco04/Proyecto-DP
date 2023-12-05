@@ -100,10 +100,10 @@ public  class TransportCompany
         Collections.sort(this.vehicles, c);
         for(int i=0; i<this.vehicles.size() && libre == null;i++){
             Taxi t=this.vehicles.get(i);
-            if(t.getPassenger().getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
+            if(p.getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
                 libre=t;
             }
-            else if(t.getOccupation() < 4 && t.isFree() && p.getCreditCard() < 200000 && t.getOccupation() > 1){
+            else if(t.isFree() && p.getCreditCard() < 20000 && t.getOccupation() > 1){
                 libre = t;
             }
         }

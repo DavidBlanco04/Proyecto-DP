@@ -3,14 +3,14 @@
  * This is the class 'Passengers VIP' which has the same characteristics that
  * the superclass which belongs to (Passenger) but with other new ones.
  */
-public abstract class PassengerVip extends Passenger
+public class PassengerVip extends Passenger
 {
     /**
      * Constructor for objects of class PassengerVip
      */
-    public PassengerVip(Location pickup, Location destination, String name,Reliable reliable)
+    public PassengerVip(Location pickup, Location destination, String name,int arrivalTime, int creditCard,Reliable reliable)
     {
-        super(pickup,destination,name,reliable);
+        super(pickup,destination,name,arrivalTime,creditCard,reliable);
     }
 
     /**

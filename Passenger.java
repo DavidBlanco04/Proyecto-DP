@@ -18,7 +18,7 @@ public abstract class Passenger
      * @param name The passenger's name
      * @throws NullPointerException If either location is null.
      */
-    public Passenger(Location pickup, Location destination, String name, Reliable reliable)
+    public Passenger(Location pickup, Location destination, String name,int arrivalTime, int creditCard,Reliable reliable)
     {
         if(pickup == null) {
             throw new NullPointerException("Pickup location");
@@ -30,6 +30,8 @@ public abstract class Passenger
         this.destination = destination;
         this.name = name;
         setReliable(reliable);
+        this.arrivalTime= arrivalTime;
+        this.creditCard= creditCard;
         this.taxiName = null;
 
     }

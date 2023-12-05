@@ -12,8 +12,6 @@ import java.util.*;
  */
 public class DemoInicialFinal
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
     TransportCompany company;
     private List<Taxi> actors;

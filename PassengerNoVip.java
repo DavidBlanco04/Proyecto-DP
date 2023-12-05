@@ -3,15 +3,15 @@
  * This is the class 'Passengers VIP' which has the same characteristics that
  * the superclass which belongs to (Passenger) but with other way to pay.
  */
-public abstract class PassengerNoVip extends Passenger
+public class PassengerNoVip extends Passenger
 {
 
     /**
      * Constructor for objects of class PassengerNoVip
      */
-    public PassengerNoVip(Location pickup, Location destination, String name,Reliable reliable)
+    public PassengerNoVip(Location pickup, Location destination, String name,int arrivalTime,int creditCard,Reliable reliable)
     {
-        super(pickup,destination,name,reliable);
+        super(pickup,destination,name,arrivalTime, creditCard,reliable);
     }
 
     /**

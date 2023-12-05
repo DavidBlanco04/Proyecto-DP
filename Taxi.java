@@ -52,6 +52,8 @@ public abstract class Taxi
         idleCount = 0;
         passenger =new TreeSet< >(new ComparadorArrivalTime());
         passengersTransported = 0;
+        this.occupation = 1;
+        valuation=0;
     }
 
     /**
@@ -402,7 +404,7 @@ public abstract class Taxi
      *calculate this consumption in a different way.
      * @return The fuel consumtion of the taxi.
      */
-    public abstract int obtainConsumption();
+    public abstract int obtainConsumption(Taxi t);
 
     /**
      * Return details of the taxi, such as where it is.

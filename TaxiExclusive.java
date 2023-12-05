@@ -4,7 +4,7 @@
  * the superclass which belongs to (Taxi). This kind of taxi has its own 
  * propierties such as its weight and its level of popularity on social networks. 
  */
-public abstract class TaxiExclusive extends Taxi
+public class TaxiExclusive extends Taxi
 {
     private int weight;
     private int popularity;
@@ -25,7 +25,8 @@ public abstract class TaxiExclusive extends Taxi
      * @param the taxi which we want to calculate its fuel consumption.
      * @return returns the fuel consumption made.
      */
-    public int obtainComsumption(Taxi t)
+    @Override
+    public int obtainConsumption(Taxi t)
     {
         int consumption = (weight/2) * t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation());
         return consumption;

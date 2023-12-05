@@ -4,14 +4,15 @@
  * the superclass which belongs to (Taxi) but with other way to calculate the
  * fuel consumption and with a maximum occupation of 4 people. 
  */
-public abstract class TaxiShuttle extends Taxi
+public class TaxiShuttle extends Taxi
 {
     /**
      * Constructor for objects of class TaxiShuttle
      */
-    public TaxiShuttle(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption)
+    public TaxiShuttle(TransportCompany company, Location location, String name, FuelConsumption fuelConsumption, int occupation)
     {
-        super(company,location,name, fuelConsumption);
+        super(company,location,name,fuelConsumption);
+        this.occupation = occupation;
     }
 
     /**
@@ -20,7 +21,7 @@ public abstract class TaxiShuttle extends Taxi
      * @param the taxi which we want to calculate its fuel consumption.
      * @return returns the fuel consumption made.
      */
-    public int obtainComsumption(Taxi t)
+    public int obtainConsumption(Taxi t)
     {
         int consumption =t.getValorFuelConsumption() * t.getInitialPosition().distance(t.getLocation()) ;
         return consumption;

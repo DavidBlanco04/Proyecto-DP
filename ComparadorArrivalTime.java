@@ -12,7 +12,7 @@ public class ComparadorArrivalTime implements Comparator<Passenger>
         if (p1.getArrivalTime()==p2.getArrivalTime()){
             return new ComparadorNombrePassenger().compare(p1,p2);
         }
-        else if(p1.getArrivalTime()<p2.getArrivalTime()){
+        else if(p1.getArrivalTime()>p2.getArrivalTime()){
             return 1;
         }
         else{
