@@ -10,10 +10,10 @@ public class ComparadorValuationTaxi implements Comparator <Taxi>
      */
     public int compare(Taxi t1, Taxi t2)
     { 
-        if(t1.getValuation()>t2.getValuation()){
+        if(t1.getValuation()<t2.getValuation()){
             return  1;
         }
-        else if(t1.getValuation()<t2.getValuation()){
+        else if(t1.getValuation()>t2.getValuation()){
             return -1;
         }
         else{

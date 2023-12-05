@@ -85,7 +85,14 @@ public  class TransportCompany
     { 
         this.passengers.add(passenger);
     }
-
+    
+    public boolean isFreeAssignments(Taxi t){
+        boolean isFree = true;
+        if(assignments.containsKey(t) && assignments.get(t).size()>=t.getOccupation()){
+            isFree = false;
+        }
+        return isFree;
+    }
     /**
      * Find the most closed free vehicle to a location, if any.
      * @param the passenger which the taxi want to pickup
@@ -100,11 +107,13 @@ public  class TransportCompany
         Collections.sort(this.vehicles, c);
         for(int i=0; i<this.vehicles.size() && libre == null;i++){
             Taxi t=this.vehicles.get(i);
-            if(p.getCreditCard() > 20000 && t.getOccupation() == 1 && t.isFree()){
+            if(p.getCreditCard() > 20000 && t.getOccupation() == 1 && isFreeAssignments(t)){
                 libre=t;
+                libre.setPickupLocation(p.getPickup());
             }
-            else if(t.isFree() && p.getCreditCard() < 20000 && t.getOccupation() > 1){
+            else if(isFreeAssignments(t) && p.getCreditCard() < 20000 && t.getOccupation() > 1){
                 libre = t;
+                libre.setPickupLocation(p.getPickup());
             }
         }
         return libre;
@@ -126,10 +135,13 @@ public  class TransportCompany
                 assignments.remove(t);
             }  
             enc=true;
+            p.add(passenger);
             assignments.put(t,p);
-            t.setPickupLocation(passenger.getPickup());
-            System.out.println (t.toString() + " go to pick up "
+            System.out.println (t.getClass().getName() + " " +t.getName()+" at location: " + t.getLocation()+ " occupation: "
+                + t.getOccupation()+ " go to pick up "
                 + passenger.getName()+ " at " + t.getTargetLocation());
+            t.setPickupLocation(p.first().getPickup());
+
         }
         return enc;
     }
@@ -141,26 +153,11 @@ public  class TransportCompany
     public void arrivedAtPickup(Taxi taxi)
     {
         boolean enc=false;
-        Taxi t = null;
-        Map.Entry <Taxi,TreeSet<Passenger>> a = null;
-        Set<Map.Entry <Taxi,TreeSet<Passenger>>> entrada = assignments.entrySet();
-        TreeSet<Passenger>p = null;
-        Iterator<Map.Entry <Taxi,TreeSet<Passenger>>> it=entrada.iterator();
-        while (it.hasNext() && !enc){
-            a = it.next();
-            if(a.getKey().getName().equals(taxi.getName())){
-                t = a.getKey();
-                p = a.getValue();
-                it.remove();
-                enc = true;
-
-            }
-        }
-        if(t!= null ){
-            t.pickup(p.first());
-            System.out.println("<<<< "+ t.getClass().getName()+ " "+t.getName() +" at location "+ t.getLocation()+ " occupation "+t.getOccupation()
+        TreeSet<Passenger>p = assignments.get(taxi);
+        if(taxi!= null ){
+            taxi.pickup(p.first());
+            System.out.println("<<<< "+ taxi.getClass().getName()+ " "+taxi.getName() +" at location "+ taxi.getLocation()+ " occupation "+taxi.getOccupation()
                 +" pick up " + p.first().getName());
-
         }
     }
 
@@ -174,9 +171,9 @@ public  class TransportCompany
         String mensaje = " ";
         if(assignments.containsKey(t)){
             mensaje=(t.getClass().getName()+ " "+ t.getName() + " at " + t.getLocation()
-                +" occupation " +t.getOccupation()+ " offloads" + p.toString());
+                +" occupation " +t.getOccupation()+ " offloads " + p.toString());
             assignments.get(t).pollFirst();
-            t.setValuation(p.act());
+            t.setValuation(t.getValuation()+p.act());
             if(assignments.get(t).size() >0){
                 t.setTargetLocation(assignments.get(t).first().getPickup());
             }
@@ -197,18 +194,42 @@ public  class TransportCompany
         Taxi idle = null;
         ComparadorValuationTaxi c1 = new ComparadorValuationTaxi();
         ComparadorIdleTaxi c2 = new ComparadorIdleTaxi(); 
-        
+
         Collections.sort(this.vehicles, c1);
         v = this.vehicles.get(0);
-        
+
         Collections.sort(this.vehicles, c2);
         idle = this.vehicles.get(0);
-        
-        System.out.println("-->> Taxi(s) with less time not active <<--");
-        idle.showFinalInfo();
-        System.out.println("-->> Taxi(s) with highest evaluation <<--");
-        v.showFinalInfo();
 
+        System.out.println("-->> Taxi(s) with less time not active <<--");
+        System.out.println(idle.showFinalInfo());
+        System.out.println("-->> Taxi(s) with highest evaluation <<--");
+        System.out.println(v.showFinalInfo());
+
+    }
+
+    /**
+     * Is the taxi in the pick up location?
+     * @return Whether or not this taxi is in the pick up location.
+     */
+    public boolean verifyPickUp(Taxi t){
+        TreeSet<Passenger>p = assignments.get(t);
+        if(t.getLocation().equals(p.first().getPickup())){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Is the taxi in the destination location?
+     * @return Whether or not this taxi is in the destination location.
+     */
+    public boolean verifyDestination(Taxi t){
+        TreeSet<Passenger>p = assignments.get(t);
+        if(t.getLocation().equals(p.first().getDestination())){
+            return true;
+        }
+        return false;
     }
 }
  

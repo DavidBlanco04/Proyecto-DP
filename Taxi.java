@@ -90,7 +90,16 @@ public abstract class Taxi
     {
         return passenger.first();
     }
-
+    
+     /**
+     * Get the number of passenger in the taxi.
+     * @return how many passenger are in the taxi right now.
+     */
+    public int getNumPassenger()
+    {
+        return passenger.size();
+    }
+    
     /**
      *Receive a passenger. This passenger will be added to the passengers set.
      *@param the passenger name
@@ -301,7 +310,7 @@ public abstract class Taxi
      */
     public boolean isFree()
     {
-        if(occupation<4){
+        if(getNumPassenger() < occupation){
             return true;
         }
         return false;
@@ -343,8 +352,8 @@ public abstract class Taxi
      */
     public void offloadPassenger()
     {
-        passenger=null;
-        clearTargetLocation();
+        passenger.remove(passenger.first());
+        //clearTargetLocation();
     }
 
     /**
@@ -385,11 +394,11 @@ public abstract class Taxi
             location = location.nextLocation(targetLocation);
             System.out.println(this.getName() +" moving to:"+ location);
             if(this.location.equals(this.targetLocation)){
-                if(isFree()){
+                if(isFree() && company.verifyPickUp(this)){
                     notifyPickupArrival();
 
                 }
-                else{
+                else if(company.verifyDestination(this)){
                     notifyPassengerArrival(passenger.first());
                     offloadPassenger();
                     incrementPassengersTransported();
@@ -402,7 +411,7 @@ public abstract class Taxi
     /**
      *returns the fuel consumption made. Each type of taxi will 
      *calculate this consumption in a different way.
-     * @return The fuel consumtion of the taxi.
+     * @return The fuel consumption of the taxi.
      */
     public abstract int obtainConsumption(Taxi t);
 
@@ -415,7 +424,7 @@ public abstract class Taxi
         return (getClass().getName() +" "+ getName() + " at " + getLocation() 
             + " Passengers transported: " + getPassengersTransported()
             + " - non active for: " + getIdleCount() + " times - valuation: "+ getValuation()
-            + " - consumption: "+ getValorFuelConsumption());
+            + " - consumption: "+ obtainConsumption(this));
 
     }
 

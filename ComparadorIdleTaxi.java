@@ -11,10 +11,10 @@ public class ComparadorIdleTaxi implements Comparator <Taxi>
      */
     public int compare(Taxi t1, Taxi t2)
     {
-        if(t1.getIdleCount()<t2.getIdleCount()){
+        if(t1.getIdleCount()>t2.getIdleCount()){
             return 1;
         }
-        else if(t1.getIdleCount()>t2.getIdleCount()){
+        else if(t1.getIdleCount()<t2.getIdleCount()){
             return  -1;
         }
         else{

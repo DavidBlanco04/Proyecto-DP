@@ -38,7 +38,7 @@ public class TaxiExclusive extends Taxi
      */
     public void serPopularEnRedes(Taxi t){
         if(t.getPassenger().getCreditCard() > 20000){
-            popularity =+ 4;
+            popularity = popularity + 4;
         }
         else{
             popularity--;
@@ -50,8 +50,18 @@ public class TaxiExclusive extends Taxi
      * popularity on social networks.
      */
     @Override
-    public void act(){
-        serPopularEnRedes(this);
-        super.act();
+    public void notifyPassengerArrival(Passenger passenger){
+        super.notifyPassengerArrival(passenger);
+        serPopularEnRedes(this);  
+    }
+
+    /**
+     * Return details of the taxi, such as where it is.
+     * @return A string representation of the taxi.
+     */
+    @Override
+    public String showFinalInfo(){
+        return super.showFinalInfo()+ 
+        " -popularity: "+ popularity;
     }
 }
