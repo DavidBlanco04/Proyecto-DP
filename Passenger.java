@@ -16,6 +16,10 @@ public abstract class Passenger
      * @param pickup The pickup location, must not be null.
      * @param destination The destination location, must not be null.
      * @param name The passenger's name
+     * @param taxiName The taxi's name 
+     * @param arrivalTime the time when the passenger should arrive at the destination
+     * @param crediCard how much money has the passenger in his/her creditCard
+     * @param reliable the level of reliability of the passenger
      * @throws NullPointerException If either location is null.
      */
     public Passenger(Location pickup, Location destination, String name,int arrivalTime, int creditCard,Reliable reliable)
@@ -51,7 +55,6 @@ public abstract class Passenger
     {
         return name;
     }
-
     /**
      *Receive a name. This becomes the passenger's name.
      *@param the passenger's name
