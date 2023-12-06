@@ -35,7 +35,7 @@ public class PassengerTest
      */
     public PassengerTest()
     {
-        
+
     }
 
     /**
@@ -90,7 +90,7 @@ public class PassengerTest
         assertEquals(passenger1.getArrivalTime(),11);
         assertEquals(passenger1.getCreditCard(),9000);
         assertEquals(passenger1.getReliable(),reliable1);
-        
+
         assertEquals(passenger2.getPickup(),l2);
         assertEquals(passenger2.getDestination(),l5);
         assertEquals(passenger2.getName(),"Cecilia");
@@ -108,10 +108,10 @@ public class PassengerTest
     {
         passenger1.setTaxiName("T1");
         passenger2.setTaxiName("T2");
-        
+
         assertEquals(passenger1.getTaxiName(),"T1");
         assertEquals(passenger2.getTaxiName(),"T2");
-      
+
     }
 
     /**
@@ -121,7 +121,17 @@ public class PassengerTest
     @Test
     public void testGetPickupLocation ()
     {
-        assertTrue(passenger1.getPickup()==l1);
-        assertTrue(passenger2.getPickup()==l2);
+        assertEquals(passenger1.getPickup(),l1);
+        assertEquals(passenger2.getPickup(),l2);
+    }
+    /**
+     * Test the decrease on passenger's credit card.
+     */
+    @Test
+    public void testdecrementCreditCard(){
+        passenger1.pay();
+        passenger2.pay();
+        assertEquals(passenger1.getCreditCard(),8970);
+        assertEquals(passenger2.getCreditCard(),27390);
     }
 }

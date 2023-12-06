@@ -24,7 +24,7 @@ public abstract class Taxi
     int valuation;
     //The maximum occupation of th taxi it must be a number between 1 and 4
     int occupation;
-    
+
     FuelConsumption fuelConsumption;
     /**
      * Constructor of class Vehicle
@@ -90,8 +90,8 @@ public abstract class Taxi
     {
         return passenger.first();
     }
-    
-     /**
+
+    /**
      * Get the number of passenger in the taxi.
      * @return how many passenger are in the taxi right now.
      */
@@ -99,7 +99,7 @@ public abstract class Taxi
     {
         return passenger.size();
     }
-    
+
     /**
      *Receive a passenger. This passenger will be added to the passengers set.
      *@param the passenger name
@@ -147,15 +147,15 @@ public abstract class Taxi
             throw new NullPointerException();
         }
     }
-    
-     /**
+
+    /**
      * @return Where this vehicle where created initially.
      */
     public Location getInitialPosition()
     {
         return initialPosition;
     }
-    
+
     /**
      * Receive a pickup location. This becomes the
      * target location.
@@ -231,14 +231,14 @@ public abstract class Taxi
     public void setCompany(TransportCompany c){
         company=c;
     }
-    
+
     /**
      * @return the valuation of the vehicle.
      */
     public int getValuation(){
         return valuation;
     }
-    
+
     /**
      * Recieve a valuation. This becomes the valuation of a vehicle.
      * @param the valuation that the passengers give to a vehicle.
@@ -246,21 +246,21 @@ public abstract class Taxi
     public void setValuation(int valuation){
         this.valuation = valuation;
     }
-    
+
     /**
      * @return a enum that represents the average vehicle fuel consumption.
      */
     public FuelConsumption getFuelConsumption(){
         return fuelConsumption;
     }
-    
+
     /**
      *@return the exact value of the average vehicle fuel consumption.
      */
     public int getValorFuelConsumption(){
         return fuelConsumption.getValor();
     }
-    
+
     /**
      * Recieve a fuel consumption amount. This becomes the vehicle fuel 
      * consumption
@@ -269,14 +269,14 @@ public abstract class Taxi
     public void setFuelConsumption(FuelConsumption fuelConsumption){
         this.fuelConsumption = fuelConsumption;
     }
-    
+
     /**
      * @return the maximum occupation of a taxi.
      */
     public int getOccupation(){
         return occupation;
     }
-    
+
     /**
      * Recieve a number. This will be the maximum occupation of the taxi. 
      * @param An integer that represents the maximum occupation of the vehicle.
@@ -284,6 +284,7 @@ public abstract class Taxi
     public void setOccupation(int occupation){
         this.occupation = occupation;
     }
+
     /**
      * Increment the number of steps on which this vehicle
      * has been idle.
@@ -353,7 +354,6 @@ public abstract class Taxi
     public void offloadPassenger()
     {
         passenger.remove(passenger.first());
-        //clearTargetLocation();
     }
 
     /**
@@ -407,7 +407,7 @@ public abstract class Taxi
             }
         }
     }
-    
+
     /**
      *returns the fuel consumption made. Each type of taxi will 
      *calculate this consumption in a different way.

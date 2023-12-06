@@ -71,9 +71,9 @@ public class LocationTest
         Location l2=new Location(5,5);
         Location l3=new Location(5,4);
         
-        assertTrue(l2.nextLocation(l1)==l1);
+        assertEquals(l2.nextLocation(l1),l1);
         assertEquals(startLocation.nextLocation(destination),destination);
-        assertTrue(l3.nextLocation(l3)==l3);
+        assertEquals(l3.nextLocation(l3),l3);
         assertEquals(l2.nextLocation(location1),location1);
 
     }

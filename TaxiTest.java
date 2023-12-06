@@ -89,7 +89,27 @@ public class TaxiTest
     @Test
     public void testCreation()
     {
-        assertEquals(true, taxi.isFree());
+        assertTrue(taxi.isFree());
+        assertTrue(taxiExcl1.isFree());
+        assertEquals(true,taxiShut2.isFree());
+
+        assertEquals(taxi.getCompany(),company);
+        assertEquals(taxi.getLocation(),taxiLocation);
+        assertEquals(taxi.getName(),"T1");
+        assertEquals(taxi.getFuelConsumption(),fuelCons1);
+        assertEquals(taxi.getOccupation(),4);
+
+        assertEquals(taxiExcl1.getCompany(),company);
+        assertEquals(taxiExcl1.getLocation(),taxiLocation);
+        assertEquals(taxiExcl1.getName(),"T2");
+        assertEquals(taxiExcl1.getFuelConsumption(),fuelCons3);
+        assertEquals(taxiExcl1.getWeight(),3000);
+
+        assertEquals(taxiShut2.getCompany(),company);
+        assertEquals(taxiShut2.getLocation(),taxiLocation2);
+        assertEquals(taxiShut2.getName(),"T3");
+        assertEquals(taxiShut2.getFuelConsumption(),fuelCons1);
+        assertEquals(taxiShut2.getOccupation(),3);
     }
 
     /**
@@ -99,7 +119,21 @@ public class TaxiTest
     @Test
     public void testPickup()
     {
-        
+        taxi.pickup(passenger);
+        assertEquals(taxi.getTargetLocation(),passenger.getDestination());
+        assertEquals(passenger.getTaxiName(),taxi.getName());
+        assertEquals(taxi.getPassenger(),passenger);
+
+        taxiExcl1.pickup(passenger1);
+        assertEquals(taxiExcl1.getTargetLocation(),passenger1.getDestination());
+        assertEquals(passenger1.getTaxiName(),taxiExcl1.getName());
+        assertEquals(taxiExcl1.getPassenger(),passenger1);
+
+        taxiShut2.pickup(passenger2);
+        assertEquals(taxiShut2.getTargetLocation(),passenger2.getDestination());
+        assertEquals(passenger2.getTaxiName(),taxiShut2.getName());
+        assertEquals(taxiShut2.getPassenger(),passenger2);
+
     }
 
     /**
@@ -108,7 +142,21 @@ public class TaxiTest
      */
     public void testOffload()
     {
-        
+        taxi.offloadPassenger();
+        assertEquals(taxi.getPassenger(),null);
+        taxi.clearTargetLocation();
+        assertEquals(taxi.getTargetLocation(),null);
+
+        taxiExcl1.offloadPassenger();
+        assertEquals(taxiExcl1.getPassenger(),null);
+        taxiExcl1.clearTargetLocation();
+        assertEquals(taxiExcl1.getTargetLocation(),null);
+
+        taxiShut2.offloadPassenger();
+        assertEquals(taxiShut2.getPassenger(),null);
+        taxiShut2.clearTargetLocation();
+        assertEquals(taxiShut2.getTargetLocation(),null);
+
     }
 
     /**
@@ -117,7 +165,55 @@ public class TaxiTest
      */
     public void testDelivery()
     {
-        
+        //Taxi picks up and delivers its passenger
+        taxi.pickup(passenger);
+        assertEquals(taxi.getTargetLocation(),passenger.getDestination());
+        assertEquals(passenger.getTaxiName(),taxi.getName());
+        assertEquals(taxi.getPassenger(),passenger);
+        taxi.offloadPassenger();
+        assertEquals(taxi.getPassenger(),null);
+        taxi.clearTargetLocation();
+        assertEquals(taxi.getTargetLocation(),null);
+
+        //TaxiExcl1 picks up and delivers its passenger
+        taxiExcl1.pickup(passenger1);
+        assertEquals(taxiExcl1.getTargetLocation(),passenger1.getDestination());
+        assertEquals(passenger1.getTaxiName(),taxiExcl1.getName());
+        assertEquals(taxiExcl1.getPassenger(),passenger1);
+        taxiExcl1.offloadPassenger();
+        assertEquals(taxiExcl1.getPassenger(),null);
+        taxiExcl1.clearTargetLocation();
+        assertEquals(taxiExcl1.getTargetLocation(),null);
+
+        //TaxiShut2 picks up and delivers its passenger
+        taxiShut2.pickup(passenger2);
+        assertEquals(taxiShut2.getTargetLocation(),passenger2.getDestination());
+        assertEquals(passenger2.getTaxiName(),taxiShut2.getName());
+        assertEquals(taxiShut2.getPassenger(),passenger2);
+        taxiShut2.offloadPassenger();
+        assertEquals(taxiShut2.getPassenger(),null);
+        taxiShut2.clearTargetLocation();
+        assertEquals(taxiShut2.getTargetLocation(),null);
+    }
+
+    /**
+     * Test the calculation of the consumption of different taxis.
+     */
+    @Test
+    public void testObtainComsumption (){
+        assertEquals(taxi.obtainConsumption(taxi),taxi.getValorFuelConsumption() * taxi.getInitialPosition().distance(taxi.getLocation()));;
+        assertEquals(taxiShut2.obtainConsumption(taxiShut2),taxiShut2.getValorFuelConsumption() * taxiShut2.getInitialPosition().distance(taxiShut2.getLocation()));
+        assertEquals(taxiExcl1.obtainConsumption(taxiExcl1),((taxiExcl1.getWeight())/2) * taxiExcl1.getValorFuelConsumption() * taxiExcl1.getInitialPosition().distance(taxiExcl1.getLocation()));
+    }
+
+    /**
+     * Test the obtaining of the first passenger (in case the taxi carries one or more passengers)
+     */  
+    @Test
+    public void testGetPassenger(){
+        taxi.setPassenger(passenger);
+        taxi.setPassenger(passenger2);
+        assertEquals(taxi.getPassenger(),passenger2);
     }
 }
 

@@ -56,6 +56,13 @@ public class TaxiExclusive extends Taxi
     }
 
     /**
+     *@return the weight of the vehicle.
+     */
+    public int getWeight(){
+        return weight;
+    }
+
+    /**
      * Return details of the taxi, such as where it is.
      * @return A string representation of the taxi.
      */
