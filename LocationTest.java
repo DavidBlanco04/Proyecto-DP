@@ -67,8 +67,6 @@ public class LocationTest
     @Test
     public void testAdjacentLocations()
     {
-        // Testear la adyacencia entre dos localizaciones. Se puede hacer 
-        // utilizando llamada al método "nextLocation".
         Location l1=new Location(6,6);
         Location l2=new Location(5,5);
         Location l3=new Location(5,4);

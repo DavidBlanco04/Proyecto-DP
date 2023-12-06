@@ -12,16 +12,24 @@ import org.junit.Test;
  */
 public class PassengerTest
 {
+    private Location l1;
+    private Location l2;
+    private Location l3;
+    private Location l4;
     private Location location1;
+    private Location l5;
     private Location location2;
-    private Location location3;
-    private Location location4;
-    private Reliable[] reliable1;
+    private Reliable[] reliable;
+    private Reliable reliable1;
     private Reliable reliable2;
-    private Reliable reliable3;
-    private PassengerNoVip p1;
-    private PassengerVip p2;
-
+    private PassengerNoVip passenger1;
+    private PassengerVip passenger2;
+    private TransportCompany transport1;
+    private FuelConsumption[] fuelCons;
+    private FuelConsumption fuelCons1;
+    private FuelConsumption fuelCons2;
+    private TaxiShuttle taxiShut1;
+    private TaxiExclusive taxiExcl1;
     /**
      * Default constructor for test class PassengerTest
      */
@@ -38,15 +46,24 @@ public class PassengerTest
     @Before
     public void setUp()
     {
-        location1 = new Location(10, 4);
-        location2 = new Location(3, 5);
-        location3 = new Location(2, 9);
-        location4 = new Location(11, 3);
-        reliable1 = Reliable.values();
-        reliable2 = reliable1[0];
-        reliable3 = reliable1[1];
-        p1 = new PassengerNoVip(location1, location2, "Amador", 11, 9000, reliable2);
-        p2 = new PassengerVip(location3, location4, "Cecilia", 17, 30000, reliable3);
+        l1 = new Location(10, 4);
+        l2 = new Location(6, 6);
+        l3 = new Location(4, 3);
+        l4 = new Location(2, 9);
+        location1 = new Location(15, 9);
+        l5 = new Location(9, 5);
+        location2 = new Location(10, 2);
+        reliable = Reliable.values();
+        reliable1 = reliable[0];
+        reliable2 = reliable[1];
+        passenger1 = new PassengerNoVip(l1, l4, "Amador", 11, 9000, reliable1);
+        passenger2 = new PassengerVip(l2, l5, "Cecilia", 17, 28000, reliable2);
+        transport1 = new TransportCompany("Taxi Chollo");
+        fuelCons = FuelConsumption.values();
+        fuelCons1 = fuelCons[1];
+        fuelCons2 = fuelCons[2];
+        taxiShut1 = new TaxiShuttle(transport1, l3, "T1", fuelCons1, 4);
+        taxiExcl1 = new TaxiExclusive(transport1, location2, "T2", fuelCons2, 2500);
     }
 
     /**
@@ -67,10 +84,19 @@ public class PassengerTest
     @Test
     public void testCreation()
     {
-        //TODO implementar este método
-        // Testear la creación correcta de objetos de tipo Passenger comprobando 
-        // que la inicialización de campos como dirección de recogida y destino es correcta.
-       
+        assertEquals(passenger1.getPickup(),l1);
+        assertEquals(passenger1.getDestination(),l4);
+        assertEquals(passenger1.getName(),"Amador");
+        assertEquals(passenger1.getArrivalTime(),11);
+        assertEquals(passenger1.getCreditCard(),9000);
+        assertEquals(passenger1.getReliable(),reliable1);
+        
+        assertEquals(passenger2.getPickup(),l2);
+        assertEquals(passenger2.getDestination(),l5);
+        assertEquals(passenger2.getName(),"Cecilia");
+        assertEquals(passenger2.getArrivalTime(),17);
+        assertEquals(passenger2.getCreditCard(),28000);
+        assertEquals(passenger2.getReliable(),reliable2);
     }
 
     /**
@@ -80,9 +106,11 @@ public class PassengerTest
     @Test
     public void testGetTaxiName()
     {
-        //TODO implementar este método
-        // Testear el método que devuelve el nombre del taxi que ha transportado
-        //al pasajero/a
+        passenger1.setTaxiName("T1");
+        passenger2.setTaxiName("T2");
+        
+        assertEquals(passenger1.getTaxiName(),"T1");
+        assertEquals(passenger2.getTaxiName(),"T2");
       
     }
 
@@ -93,7 +121,7 @@ public class PassengerTest
     @Test
     public void testGetPickupLocation ()
     {
-        //TODO implementar este método
-        // Testear el método que devuelve la dirección de recogida del objeto.
+        assertTrue(passenger1.getPickup()==l1);
+        assertTrue(passenger2.getPickup()==l2);
     }
 }

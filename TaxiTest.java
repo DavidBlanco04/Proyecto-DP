@@ -12,10 +12,28 @@ import org.junit.Test;
  */
 public class TaxiTest
 {
-    private Taxi taxi;
-    private Passenger passenger;
-    //TODO
-    //crear más campos (si es necesario) 
+    private Location pickup;
+    private Location destination;
+    private Location taxiLocation;
+    private Reliable[] reliable;
+    private Reliable reliable1;
+    private Reliable reliable2;
+    private FuelConsumption[] fuelCons;
+    private FuelConsumption fuelCons1;
+    private FuelConsumption fuelCons2;
+    private FuelConsumption fuelCons3;
+    private TransportCompany company;
+    private PassengerNoVip passenger;
+    private TaxiShuttle taxi;
+    private Location location1;
+    private Location location2;
+    private PassengerVip passenger1;
+    private TaxiExclusive taxiExcl1;
+    private Location location3;
+    private Location location4;
+    private Location taxiLocation2;
+    private PassengerNoVip passenger2;
+    private TaxiShuttle taxiShut2;
     /**
      * Default constructor for test class TaxiTest
      */
@@ -31,17 +49,28 @@ public class TaxiTest
     @Before
     public void setUp()
     {
-        TransportCompany company = new TransportCompany("Compañía Taxis Cáceres");
-        // Starting position for the taxi.
-        Location taxiLocation = new Location(0, 0);
-        // Locations for the passenger.
-        Location pickup = new Location(1, 2);
-        Location destination = new Location(5, 6);
-
-        passenger = new Passenger(pickup, destination,"Kevin");
-        taxi = new Taxi(company, taxiLocation,"T1");
-        //TODO
-        //Completar (si es necesario) este método
+        pickup = new Location(1, 2);
+        destination = new Location(5, 6);
+        taxiLocation = new Location(0, 0);
+        reliable = Reliable.values();
+        reliable1 = reliable[0];
+        reliable2 = reliable[1];
+        fuelCons = FuelConsumption.values();
+        fuelCons1 = fuelCons[0];
+        fuelCons2 = fuelCons[1];
+        fuelCons3 = fuelCons[2];
+        company = new TransportCompany("Compañía Taxis Cáceres");
+        passenger = new PassengerNoVip(pickup, destination, "Kevin", 19, 14000, reliable1);
+        taxi = new TaxiShuttle(company, taxiLocation, "T1", fuelCons1, 4);
+        location1 = new Location(3, 4);
+        location2 = new Location(8, 8);
+        passenger1 = new PassengerVip(location1, location2, "Amalia", 16, 90000, reliable2);
+        taxiExcl1 = new TaxiExclusive(company, taxiLocation, "T2", fuelCons3, 3000);
+        location3 = new Location(4, 4);
+        location4 = new Location(9, 5);
+        taxiLocation2 = new Location(3, 4);
+        passenger2 = new PassengerNoVip(location3, location4, "Luis Miguel", 9, 16000, reliable2);
+        taxiShut2 = new TaxiShuttle(company, taxiLocation2, "T3", fuelCons1, 3);
     }
 
     /**
@@ -70,7 +99,7 @@ public class TaxiTest
     @Test
     public void testPickup()
     {
-        //TODO implementar este método
+        
     }
 
     /**
@@ -79,7 +108,7 @@ public class TaxiTest
      */
     public void testOffload()
     {
-        //TODO implementar este método
+        
     }
 
     /**
@@ -88,7 +117,7 @@ public class TaxiTest
      */
     public void testDelivery()
     {
-        //TODO implementar este método
+        
     }
 }
 
